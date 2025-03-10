@@ -339,6 +339,7 @@ pimcore:
 
     gotenberg:
         base_url: 'http://gotenberg:3000'
+        ping_cache_ttl: 60
 
     config_location:
         select_options:
