@@ -19,11 +19,14 @@ namespace Pimcore\Bundle\CoreBundle\Migrations;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
+use JsonException;
 
 final class Version20250312132759 extends AbstractMigration
 {
     private const string ASSET_TABLE = 'assets';
+
     private const string SETTINGS_COLUMN = 'customSettings';
+
     private const string ID_COLUMN = 'id';
 
     public function getDescription(): string
@@ -36,13 +39,13 @@ final class Version20250312132759 extends AbstractMigration
      * When migrating from serialized to json, we need to convert the data in the columns first.
      * Afterward, we need to change the column type.
      *
-     * @throws \JsonException
+     * @throws JsonException
      * @throws Exception
      */
     public function up(Schema $schema): void
     {
-       $this->migrateAssets();
-       $this->alterColumn();
+        $this->migrateAssets();
+        $this->alterColumn();
     }
 
     /**
@@ -51,7 +54,7 @@ final class Version20250312132759 extends AbstractMigration
      *  to get rid of the json_valid check.
      *  Afterward, we need to convert the data in the columns.
      *
-     * @throws \JsonException
+     * @throws JsonException
      * @throws Exception
      */
     public function down(Schema $schema): void
@@ -62,29 +65,29 @@ final class Version20250312132759 extends AbstractMigration
 
     /**
      * @throws Exception
-     * @throws \JsonException
+     * @throws JsonException
      */
     private function migrateAssets(bool $up = true): void
     {
         $assets = $this->connection->fetchAllAssociative(
             sprintf(
-            'select %s, %s from assets',
+                'select %s, %s from assets',
                 $this->connection->quoteIdentifier(self::ID_COLUMN),
                 $this->connection->quoteIdentifier(self::SETTINGS_COLUMN)
             )
         );
 
-        foreach($assets as $asset) {
+        foreach ($assets as $asset) {
             $this->migrateAsset($asset, $up);
         }
     }
 
     /**
-     * @throws \JsonException
+     * @throws JsonException
      */
     private function migrateAsset(array $assetData, bool $up = true): void
     {
-        foreach($assetData as $column => $value) {
+        foreach ($assetData as $column => $value) {
             if (
                 !is_string($value) ||
                 empty($value) ||
@@ -101,7 +104,6 @@ final class Version20250312132759 extends AbstractMigration
                 json_encode($data, JSON_THROW_ON_ERROR) :
                 serialize($data);
 
-
             $this->addSql(
                 sprintf(
                     'UPDATE %s SET %s = ? WHERE id = ?',
@@ -110,7 +112,7 @@ final class Version20250312132759 extends AbstractMigration
                 ),
                 [
                     $data,
-                    $assetData['id']
+                    $assetData['id'],
                 ]
             );
         }

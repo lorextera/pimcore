@@ -49,7 +49,8 @@ final class Serialize
         return Pimcore::getContainer()->get('pimcore_admin.serializer');
     }
 
-    public static function getSerializer(): Serializer{
+    public static function getSerializer(): Serializer
+    {
         return Pimcore::getContainer()->get('pimcore.serializer');
     }
 
