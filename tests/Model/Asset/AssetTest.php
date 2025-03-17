@@ -326,7 +326,7 @@ class AssetTest extends ModelTestCase
                     TestHelper::resolveFilePath('assets/images/image1.jpg'),
                     'rb'
                 ),
-                'filename' => 'image1_from_stream.jpg'
+                'filename' => 'image1_from_stream.jpg',
             ]
         );
 
@@ -358,7 +358,7 @@ class AssetTest extends ModelTestCase
         $data = [
             'data' => $assetData,
             'key' => $fileName,
-            'filename' => $fileName
+            'filename' => $fileName,
         ];
         $asset = Asset::create(1, $data);
 
