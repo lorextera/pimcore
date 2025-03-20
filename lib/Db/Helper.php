@@ -18,7 +18,6 @@ namespace Pimcore\Db;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\Result;
-use Doctrine\DBAL\Types\Type;
 use Exception;
 use LogicException;
 use Pimcore\Model\Element\ValidationException;

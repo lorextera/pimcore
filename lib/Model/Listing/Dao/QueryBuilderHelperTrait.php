@@ -18,7 +18,6 @@ namespace Pimcore\Model\Listing\Dao;
 
 use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\DBAL\Query\QueryException;
-use Exception;
 use Pimcore\Model\DataObject;
 
 trait QueryBuilderHelperTrait

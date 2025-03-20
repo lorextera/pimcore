@@ -300,6 +300,7 @@ class Date extends Data implements ResourcePersistenceAwareInterface, QueryResou
             } else {
                 $maxTime = $timestamp + (86400 - 1); //specifies the top point of the range used in the condition
                 $filterField = $params['name'] ?: $this->getName();
+
                 return '`' . $filterField . '` BETWEEN ' . $db->quote($value) . ' AND ' . $db->quote((string)$maxTime);
             }
         }

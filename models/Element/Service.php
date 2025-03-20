@@ -1452,8 +1452,7 @@ class Service extends Model\AbstractModel
 
     private static function getListingFrom(PaginateListingInterface $listing): ?string
     {
-        return match(true)
-        {
+        return match(true) {
             $listing instanceof Asset\Listing => 'asset',
             $listing instanceof DataObject\Listing => 'object',
             $listing instanceof Document\Listing => 'document',

@@ -176,6 +176,7 @@ class Sql extends AbstractAdapter
                             $db->quote($value) .
                             ' AND ' .
                             $db->quote((string)$maxValue);
+
                         break;
                     }
                     $fields[] = $filter['property'];
