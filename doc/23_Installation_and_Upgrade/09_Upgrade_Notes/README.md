@@ -7,6 +7,7 @@
 - Dropped support of `gotenberg/gotenberg-php` `v1.1` in favor of just supporting `v2` which bundles Chromium functionalities that refrain from requiring a standalone chromium binary.
 
 #### [Doctrine]
+- Bundles now need to use the default EntityManager (name: 'default') with the default connection (name: 'default')  or use another EntityManager with an additional connection.
 - Added support of `doctrine/dbal` `v4`
 - Dropped support of `doctrine/dbal` `v3`
 - Changed signature of `Pimcore\Db\Helper::quoteInto()`, passing `$type` is not supported anymore to match the changes in `DBAL` about `quote()` working only with strings.
@@ -70,6 +71,7 @@ ORDER BY TABLE_NAME;
 - Removed `context` property of `ResolveUploadTargetEvent`.
 
 #### [Lib]
+- The method `Pimcore\Db\Helper::upsert()` now returns the last insert id instead of the number of affected rows.
 - Removed deprecated class `Pimcore\Helper\CsvFormulaFormatter`. Use `\League\Csv\EscapeFormula` instead.
 - Removed deprecated `getCachedSymfonyEnvironments()` method from `Pimcore\Tool`.
 
