@@ -32,6 +32,7 @@ class Helper
      * @param string[] $keys If the table needs to be updated, the columns listed in this parameter will be used as criteria/condition for the where clause.
      * Typically, these are the primary key columns.
      * The values for the specified keys are read from the $data parameter.
+     *
      * @return int|string|null last insert id or null if the insert was not successful or it was an update.
      */
     public static function upsert(
@@ -58,6 +59,7 @@ class Helper
             }
 
             $connection->update($table, $data, $critera);
+
             return null;
         }
     }
