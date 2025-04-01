@@ -1256,8 +1256,7 @@ class Service extends Model\Element\Service
         ClassDefinition $class,
         int $objectId,
         ?User $user = null
-    ): array
-    {
+    ): array {
         $layoutDefinitions = $class->getLayoutDefinitions();
 
         $result = [
@@ -1338,8 +1337,7 @@ class Service extends Model\Element\Service
         ?Concrete $object = null,
         array $context = [],
         ?User $user = null
-    ): void
-    {
+    ): void {
         if (is_null($layout)) {
             return;
         }
@@ -1392,8 +1390,7 @@ class Service extends Model\Element\Service
         ?array $allowedView,
         ?array $allowedEdit,
         ?User $user = null
-    ): void
-    {
+    ): void {
         if ($layout instanceof Model\DataObject\ClassDefinition\Data\Localizedfields || $layout instanceof Model\DataObject\ClassDefinition\Data\Classificationstore && $layout->localized === true) {
             if (is_array($allowedView) && count($allowedView) > 0) {
                 $haveAllowedViewDefault = null;
