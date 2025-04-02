@@ -85,9 +85,11 @@ abstract class SettingsStoreAwareInstaller extends AbstractInstaller
 
                 if (!$executedMigrations->hasMigration($version)) {
                     $migrationResult = new ExecutionResult($version, Direction::UP);
+
                     try {
                         $metadataStorage->ensureInitialized();
-                    } catch (TableExistsException $exception) {}
+                    } catch (TableExistsException $exception) {
+                    }
                     $metadataStorage->complete($migrationResult);
                 }
 
