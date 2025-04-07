@@ -27,6 +27,7 @@ use RuntimeException;
 final class ManagedTablesOnlyFilter
 {
     private ManagerRegistry $registry;
+
     private CommandContextHolder $commandContextHolder;
 
     private ?array $managedTables = null;
