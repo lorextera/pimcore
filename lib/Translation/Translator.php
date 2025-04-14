@@ -191,7 +191,7 @@ class Translator implements TranslatorInterface, TranslatorBagInterface, LocaleA
                 $c = $this->getCatalogue($locale);
                 $c->addCatalogue($catalogue);
                 $fallbackCatalogue = $c->getFallbackCatalogue();
-                if($fallbackCatalogue) {
+                if ($fallbackCatalogue) {
                     $this->lazyInitialize($domain, $fallbackCatalogue->getLocale());
 
                     try {
