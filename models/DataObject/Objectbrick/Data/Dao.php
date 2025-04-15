@@ -16,7 +16,6 @@
 namespace Pimcore\Model\DataObject\Objectbrick\Data;
 
 use Exception;
-use Pimcore\Db;
 use Pimcore\Db\Helper;
 use Pimcore\Model;
 use Pimcore\Model\DataObject;
@@ -116,7 +115,7 @@ class Dao extends Model\Dao\AbstractDao
         if ($isBrickUpdate) {
             $this->db->update($storetable, Helper::quoteDataIdentifiers($this->db, $data), [
                 'id'=> $object->getId(),
-                'fieldname' => $this->model->getFieldname()
+                'fieldname' => $this->model->getFieldname(),
             ]);
         } else {
             $this->db->insert($storetable, Helper::quoteDataIdentifiers($this->db, $data));
@@ -265,7 +264,7 @@ class Dao extends Model\Dao\AbstractDao
 
         $oldData = $this->db->fetchAssociative(self::SQL_SELECT_ALL . $queryTable . ' WHERE id = ? AND fieldname = ?', [
             $object->getId(),
-            $this->model->getFieldname()
+            $this->model->getFieldname(),
         ]);
         $this->db->delete($queryTable, ['id' => $object->getId(), 'fieldname' => $this->model->getFieldname()]);
 
