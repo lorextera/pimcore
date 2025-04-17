@@ -142,8 +142,7 @@ final readonly class JobRunRepository implements JobRunRepositoryInterface
         int $id,
         bool $forceReload = false,
         ?int $ownerId = null
-    ): JobRun
-    {
+    ): JobRun {
         $params = ['id' => $id];
         $params = $this->setOwnerId($params, $ownerId);
 
@@ -255,6 +254,7 @@ final readonly class JobRunRepository implements JobRunRepositoryInterface
         if ($executionContext) {
             $params['executionContext'] = $executionContext;
         }
+
         return $params;
     }
 
@@ -263,6 +263,7 @@ final readonly class JobRunRepository implements JobRunRepositoryInterface
         if ($ownerId !== null && !$this->permissionService->isAllowedToSeeAllJobRuns()) {
             $params['ownerId'] = $ownerId;
         }
+
         return $params;
     }
 }
