@@ -155,6 +155,8 @@ final class PimcoreCoreExtension extends ConfigurableExtension implements Prepen
             'pimcore_application_logger_db_max_level',
             $config['applicationlog']['loggers']['db']['max_level'] ?? Level::Emergency
         );
+
+        $this->checkProductRegistration($config, $container);
     }
 
     private function configureModelFactory(ContainerBuilder $container, array $config): void
@@ -304,5 +306,44 @@ final class PimcoreCoreExtension extends ConfigurableExtension implements Prepen
         }
 
         return $newConfiguration;
+    }
+
+    private function checkProductRegistration(array $config, ContainerBuilder $container): void
+    {
+        //replace env placeholders in encryption secret to make sure we use the actual secret
+        $encryptionSecret = $container->resolveEnvPlaceholders(
+            $container->getParameter('pimcore.encryption.secret'),
+            true
+        );
+
+        $productIdentifier = $config['product_registration']['instance_identifier'] ?? null;
+        $container->setParameter('pimcore.product_registration.instance_identifier', $productIdentifier);
+
+        //Pimcore not installed, skipping check
+        if(empty($encryptionSecret) && !Pimcore::isInstalled()) {
+            return;
+        }
+
+        if(empty($encryptionSecret)) {
+            throw new InvalidArgumentException(
+                "`pimcore.encryption.secret` is not set.\n".
+                "Run `vendor/bin/generate-defuse-key` to generate a secret and set it as container parameter " .
+                "`pimcore.encryption.secret`."
+            );
+        }
+
+        //replace env placeholders in product identifier and product key
+        $productIdentifier = $container->resolveEnvPlaceholders($productIdentifier, true);
+        $productKey = $container->resolveEnvPlaceholders(
+            $config['product_registration']['product_key'] ?? null,
+            true
+        );
+
+        $registrationValidator = new Pimcore\ProductRegistration\RegistrationValidator(
+            $encryptionSecret,
+            $productIdentifier
+        );
+
+        $registrationValidator->validateProductKey($productKey);
     }
 }
