@@ -400,7 +400,6 @@ class InstallCommand extends Command
             $input->getOption('instance-identifier')
         );
 
-
         // dispatch a bundle config event here to manually add/remove bundles/recommendations
         $bundleSetupEvent = $this->installer->dispatchBundleSetupEvent();
 
