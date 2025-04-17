@@ -404,21 +404,20 @@ class Installer
     private function runInstall(
         array $dbConfig, array $userCredentials, Connection $db,
         ?string $encryptionSecret, ?string $instanceIdentifier, string $productKey
-    ): array
-    {
+    ): array {
         $writer = new ConfigWriter();
 
         $errors = [];
         $stepsToRun = $this->getRunInstallSteps();
 
-        if(
+        if (
             in_array('write_product_registration_config', $stepsToRun) ||
             in_array('write_database_config', $stepsToRun)
         ) {
             $this->dispatchStepEvent('create_config_files');
         }
 
-        if(in_array('write_product_registration_config', $stepsToRun) && !$this->skipProductRegistrationConfig) {
+        if (in_array('write_product_registration_config', $stepsToRun) && !$this->skipProductRegistrationConfig) {
             $writer->writeProductRegistrationConfig($productKey, $instanceIdentifier, $encryptionSecret);
         }
 
@@ -651,7 +650,6 @@ class Installer
             $stdErr->writeln('  ' . str_replace(["'", '\\'], ['', '\\\\'], $process->getCommandLine()));
         }
     }
-
 
     private function clearKernelCacheDir(KernelInterface $kernel): void
     {

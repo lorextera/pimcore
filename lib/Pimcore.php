@@ -77,6 +77,7 @@ class Pimcore
     {
         try {
             \Pimcore\Db::get()->fetchOne('SELECT id FROM assets LIMIT 1');
+
             return true;
         } catch (\Exception $e) {
             return false;

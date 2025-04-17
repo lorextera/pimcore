@@ -45,8 +45,7 @@ final class ConfigWriter
         string $productKey,
         ?string $instanceIdentifier = null,
         ?string $secret = null
-    ): void
-    {
+    ): void {
         $config = [
             'pimcore' => [
                 'product_registration' => [
@@ -55,10 +54,10 @@ final class ConfigWriter
             ],
         ];
 
-        if($instanceIdentifier !== null) {
+        if ($instanceIdentifier !== null) {
             $config['pimcore']['product_registration']['instance_identifier'] = $instanceIdentifier;
         }
-        if($secret !== null) {
+        if ($secret !== null) {
             $config['pimcore']['encryption']['secret'] = $secret;
         }
 

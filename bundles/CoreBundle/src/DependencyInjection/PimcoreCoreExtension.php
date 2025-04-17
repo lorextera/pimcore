@@ -320,15 +320,15 @@ final class PimcoreCoreExtension extends ConfigurableExtension implements Prepen
         $container->setParameter('pimcore.product_registration.instance_identifier', $productIdentifier);
 
         //Pimcore not installed, skipping check
-        if(empty($encryptionSecret) && !Pimcore::isInstalled()) {
+        if (empty($encryptionSecret) && !Pimcore::isInstalled()) {
             return;
         }
 
-        if(empty($encryptionSecret)) {
+        if (empty($encryptionSecret)) {
             throw new InvalidArgumentException(
                 "`pimcore.encryption.secret` is not set.\n".
-                "Run `vendor/bin/generate-defuse-key` to generate a secret and set it as container parameter " .
-                "`pimcore.encryption.secret`."
+                'Run `vendor/bin/generate-defuse-key` to generate a secret and set it as container parameter ' .
+                '`pimcore.encryption.secret`.'
             );
         }
 

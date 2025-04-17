@@ -18,6 +18,7 @@ declare(strict_types=1);
 namespace Pimcore\Bundle\InstallBundle\Command;
 
 use Defuse\Crypto\Key;
+use InvalidArgumentException;
 use Pimcore\Bundle\InstallBundle\Event\BundleSetupEvent;
 use Pimcore\Bundle\InstallBundle\Event\InstallerStepEvent;
 use Pimcore\Bundle\InstallBundle\Event\InstallEvents;
@@ -55,7 +56,7 @@ class InstallCommand extends Command
     private RegistrationValidator $registrationValidator;
 
     public function __construct(
-        private readonly Installer                $installer,
+        private readonly Installer $installer,
         private readonly EventDispatcherInterface $eventDispatcher,
     ) {
         parent::__construct();
@@ -136,26 +137,27 @@ class InstallCommand extends Command
                 'group' => 'registration',
             ],
             'product-key' => [
-                'dynamic_description' => function() {
-                        return 'Please provide your product key. ' .
-                            'If you don\'t have one yet please register your product at ' .
-                            'https://license.pimcore.com/register?instance_identifier=' .
-                            $this->registrationValidator->getInstanceIdentifier() .
-                            '&instance_hash=' . $this->registrationValidator->getHashedInstanceIdentifier();
-                    },
+                'dynamic_description' => function () {
+                    return 'Please provide your product key. ' .
+                        'If you don\'t have one yet please register your product at ' .
+                        'https://license.pimcore.com/register?instance_identifier=' .
+                        $this->registrationValidator->getInstanceIdentifier() .
+                        '&instance_hash=' . $this->registrationValidator->getHashedInstanceIdentifier();
+                },
                 'mode' => InputOption::VALUE_REQUIRED,
                 'insecure' => true,
                 'hidden-input' => true,
                 'group' => 'registration',
-                'validator' => function(?string $productKey) {
+                'validator' => function (?string $productKey) {
 
                     if (empty($productKey)) {
-                        throw new \InvalidArgumentException('Product Key cannot be empty');
+                        throw new InvalidArgumentException('Product Key cannot be empty');
                     }
 
                     $this->checkProductKey($productKey);
+
                     return $productKey;
-                }
+                },
             ],
         ];
 
@@ -302,16 +304,17 @@ class InstallCommand extends Command
 
     }
 
-    private function loadProductSecrets(InputInterface $input): void {
+    private function loadProductSecrets(InputInterface $input): void
+    {
         $secret = $input->getOption('encryption-secret');
-        if(!$secret) {
+        if (!$secret) {
             $secret = getenv('PIMCORE_INSTALL_ENCRYPTION_SECRET')
                 ?: Key::createNewRandomKey()->saveToAsciiSafeString();
             $input->setOption('encryption-secret', $secret);
         }
 
         $instanceIdentifier = $input->getOption('instance-identifier');
-        if(!$instanceIdentifier) {
+        if (!$instanceIdentifier) {
             $instanceIdentifier = getenv('PIMCORE_INSTALL_INSTANCE_IDENTIFIER')
                 ?: Uuid::v6()->toBase58();
             $input->setOption('instance-identifier', $instanceIdentifier);
@@ -319,7 +322,6 @@ class InstallCommand extends Command
 
         $this->registrationValidator = new RegistrationValidator($secret, $instanceIdentifier);
     }
-
 
     /**
      * Prompt options which are not set interactively
@@ -343,7 +345,7 @@ class InstallCommand extends Command
             }
 
             $question = $config['prompt'] ?? $config['description'] ?? '';
-            if($config['dynamic_description'] ?? false) {
+            if ($config['dynamic_description'] ?? false) {
                 $question = $config['dynamic_description']();
             }
 
@@ -362,7 +364,7 @@ class InstallCommand extends Command
                     return $answer;
                 };
 
-                if(isset($config['validator'])) {
+                if (isset($config['validator'])) {
                     $validator = $config['validator'];
                 }
 
