@@ -64,6 +64,7 @@ use Throwable;
 class Installer
 {
     const NEEDS_INSTALL_MARKER = PIMCORE_PRIVATE_VAR . '/config/needs-install.lock';
+
     const RECOMMENDED_BUNDLES = ['PimcoreSimpleBackendSearchBundle'];
 
     public const INSTALLABLE_BUNDLES = [
