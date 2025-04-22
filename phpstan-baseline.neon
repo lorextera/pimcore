@@ -355,6 +355,11 @@ parameters:
 			path: lib/Image/Adapter/Imagick.php
 
 		-
+			message: "#^If condition is always false\\.$#"
+			count: 1
+			path: lib/Image/Chromium.php
+
+		-
 			message: '#^File is missing a "declare\(strict_types\=1\)" declaration\.$#'
 			identifier: ergebnis.declareStrictTypes
 			count: 1
@@ -1199,3 +1204,8 @@ parameters:
 			identifier: ergebnis.declareStrictTypes
 			count: 1
 			path: models/WebsiteSetting/Listing/Dao.php
+
+		-
+			message: "#^Ternary operator condition is always true\\.$#"
+			count: 1
+			path: lib/Tool/Text.php
