@@ -58,13 +58,13 @@ class Dao extends Model\Dao\AbstractDao
             $data['fieldname'] = $this->model->getFieldname();
 
             if (($params['isUpdate'] ?? false) === false && $this->model->getObject()->getClass()->getAllowInherit()) {
-            // if this is a fresh object, then we don't need the check
-            $isBrickUpdate = false; // used to indicate whether we want to consider the default value
-        } else {
-            // or brick has been added
-            $existsResult = $this->db->fetchOne(
-                'SELECT id FROM ' . $storetable . ' WHERE id = ? AND fieldname = ? LIMIT 1',
-                [$object->getId(), $this->model->getFieldname()]
+                // if this is a fresh object, then we don't need the check
+                $isBrickUpdate = false; // used to indicate whether we want to consider the default value
+            } else {
+                // or brick has been added
+                $existsResult = $this->db->fetchOne(
+                    'SELECT id FROM ' . $storetable . ' WHERE id = ? AND fieldname = ? LIMIT 1',
+                    [$object->getId(), $this->model->getFieldname()]
                 );
 
                 $isBrickUpdate = (bool)$existsResult; // used to indicate whether we want to consider the default value
@@ -110,8 +110,8 @@ class Dao extends Model\Dao\AbstractDao
                     }
 
                     $this->model->markFieldDirty($fieldName, false);
+                }
             }
-        }
 
             if ($isBrickUpdate) {
                 $this->db->update($storetable, Helper::quoteDataIdentifiers($this->db, $data), [
@@ -132,9 +132,9 @@ class Dao extends Model\Dao\AbstractDao
 
             $this->inheritanceHelper->resetFieldsToCheck();
             $oldData = $this->db->fetchAssociative(
-            self::SQL_SELECT_ALL . $querytable . ' WHERE id = ? AND fieldname = ?',
-            [$object->getId(), $this->model->getFieldname()]
-        );
+                self::SQL_SELECT_ALL . $querytable . ' WHERE id = ? AND fieldname = ?',
+                [$object->getId(), $this->model->getFieldname()]
+            );
 
             $inheritanceEnabled = $object->getClass()->getAllowInherit();
             $parentData = null;
@@ -147,18 +147,18 @@ class Dao extends Model\Dao\AbstractDao
                     // so we select the data from the parent object using FOR UPDATE, which causes a lock on this row
                     // so the data of the parent cannot be changed while this transaction is on progress
                     $parentData = $this->db->fetchAssociative(
-                    self::SQL_SELECT_ALL . $querytable . ' WHERE id = ? AND fieldname = ? FOR UPDATE',
-                    [$parentForInheritance->getId(), $this->model->getFieldname()]
-                );
+                        self::SQL_SELECT_ALL . $querytable . ' WHERE id = ? AND fieldname = ? FOR UPDATE',
+                        [$parentForInheritance->getId(), $this->model->getFieldname()]
+                    );
                 }
             }
 
             foreach ($fieldDefinitions as $key => $fd) {
                 if ($fd instanceof QueryResourcePersistenceAwareInterface) {
                     $method = 'get' . $key;
-                $fieldValue = $this->model->$method();
-                $insertData = $fd->getDataForQueryResource($fieldValue, $object);
-                $isEmpty = $fd->isEmpty($fieldValue);
+                    $fieldValue = $this->model->$method();
+                    $insertData = $fd->getDataForQueryResource($fieldValue, $object);
+                    $isEmpty = $fd->isEmpty($fieldValue);
 
                     if (is_array($insertData)) {
                         $columnNames = array_keys($insertData);

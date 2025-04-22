@@ -189,25 +189,25 @@ class Dao extends Model\Dao\AbstractDao
                     }
                     if ($fd instanceof ResourcePersistenceAwareInterface) {
                         if (is_array($fd->getColumnType())) {
-                        $fieldDefinitionParams = $this->getFieldDefinitionParams($fieldName, $language, ['isUpdate' => ($params['isUpdate'] ?? false)]);
-                        $insertDataArray = $fd->getDataForResource(
-                            $this->model->getLocalizedValue($fieldName, $language, true),
-                            $object,
-                            $fieldDefinitionParams
-                        );
-                        $insertData = array_merge($insertData, $insertDataArray);
-                        $this->model->setLocalizedValue($fieldName, $fd->getDataFromResource($insertDataArray, $object, $fieldDefinitionParams), $language, false);
-                    } else {
-                        $fieldDefinitionParams = $this->getFieldDefinitionParams($fieldName, $language, ['isUpdate' => ($params['isUpdate'] ?? false)]);
-                        $insertData[$fd->getName()] = $fd->getDataForResource(
-                            $this->model->getLocalizedValue($fieldName, $language, true),
-                            $object,
-                            $fieldDefinitionParams
-                        );
-                        $this->model->setLocalizedValue($fieldName, $fd->getDataFromResource($insertData[$fd->getName()], $object, $fieldDefinitionParams), $language, false);
+                            $fieldDefinitionParams = $this->getFieldDefinitionParams($fieldName, $language, ['isUpdate' => ($params['isUpdate'] ?? false)]);
+                            $insertDataArray = $fd->getDataForResource(
+                                $this->model->getLocalizedValue($fieldName, $language, true),
+                                $object,
+                                $fieldDefinitionParams
+                            );
+                            $insertData = array_merge($insertData, $insertDataArray);
+                            $this->model->setLocalizedValue($fieldName, $fd->getDataFromResource($insertDataArray, $object, $fieldDefinitionParams), $language, false);
+                        } else {
+                            $fieldDefinitionParams = $this->getFieldDefinitionParams($fieldName, $language, ['isUpdate' => ($params['isUpdate'] ?? false)]);
+                            $insertData[$fd->getName()] = $fd->getDataForResource(
+                                $this->model->getLocalizedValue($fieldName, $language, true),
+                                $object,
+                                $fieldDefinitionParams
+                            );
+                            $this->model->setLocalizedValue($fieldName, $fd->getDataFromResource($insertData[$fd->getName()], $object, $fieldDefinitionParams), $language, false);
+                        }
                     }
                 }
-            }
 
                 $storeTable = $this->getTableName();
                 $queryTable = $this->getQueryTableName().'_'.$language;

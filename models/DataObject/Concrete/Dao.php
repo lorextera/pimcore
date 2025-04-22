@@ -213,16 +213,16 @@ class Dao extends Model\DataObject\AbstractObject\Dao
 
                 if ($fd instanceof CustomResourcePersistingInterface) {
                     // for fieldtypes which have their own save algorithm eg. fieldcollections, relational data-types, ...
-                $saveParams = [
-                    'isUntouchable' => in_array($fd->getName(), $untouchable),
-                    'isUpdate' => $isUpdate,
-                    'context' => [
-                        'containerType' => 'object',
-                    ],
-                    'owner' => $this->model,
-                    'fieldname' => $fieldName,
-                ];
-                $saveParams['newParent'] = $this->model->isFieldDirty('parentId');
+                    $saveParams = [
+                        'isUntouchable' => in_array($fd->getName(), $untouchable),
+                        'isUpdate' => $isUpdate,
+                        'context' => [
+                            'containerType' => 'object',
+                        ],
+                        'owner' => $this->model,
+                        'fieldname' => $fieldName,
+                    ];
+                    $saveParams['newParent'] = $this->model->isFieldDirty('parentId');
                     $fd->save($this->model, $saveParams);
                 }
                 if ($fd instanceof ResourcePersistenceAwareInterface) {
@@ -277,16 +277,16 @@ class Dao extends Model\DataObject\AbstractObject\Dao
             foreach ($fieldDefinitions as $key => $fd) {
                 if ($fd instanceof QueryResourcePersistenceAwareInterface) {
                     //exclude untouchables if value is not an array - this means data has not been loaded
-                if (!in_array($key, $untouchable)) {
-                    $method = 'get' . $key;
-                    $fieldValue = $this->model->$method();
-                    $insertData = $fd->getDataForQueryResource($fieldValue, $this->model,
-                        [
-                            'isUpdate' => $isUpdate,
-                            'owner' => $this->model,
-                            'fieldname' => $key,
-                        ]);
-                    $isEmpty = $fd->isEmpty($fieldValue);
+                    if (!in_array($key, $untouchable)) {
+                        $method = 'get' . $key;
+                        $fieldValue = $this->model->$method();
+                        $insertData = $fd->getDataForQueryResource($fieldValue, $this->model,
+                            [
+                                'isUpdate' => $isUpdate,
+                                'owner' => $this->model,
+                                'fieldname' => $key,
+                            ]);
+                        $isEmpty = $fd->isEmpty($fieldValue);
 
                         if (is_array($insertData)) {
                             $columnNames = array_keys($insertData);
