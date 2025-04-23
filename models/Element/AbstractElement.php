@@ -136,7 +136,7 @@ abstract class AbstractElement extends Model\AbstractModel implements ElementInt
         return $this->userModification;
     }
 
-    public function setUserModification(int $userModification): static
+    public function setUserModification(?int $userModification): static
     {
         $this->markFieldDirty('userModification');
         $this->userModification = $userModification;
@@ -176,7 +176,7 @@ abstract class AbstractElement extends Model\AbstractModel implements ElementInt
         return $this->userOwner;
     }
 
-    public function setUserOwner(int $userOwner): static
+    public function setUserOwner(?int $userOwner): static
     {
         $this->userOwner = $userOwner;
 
