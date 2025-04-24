@@ -16,13 +16,15 @@ declare(strict_types=1);
 
 namespace Pimcore\Model\DataObject\Traits;
 
+use OutOfRangeException;
+
 /**
  * @internal
  */
 trait RangeTrait
 {
-
     abstract public function getMinimum(): int | float | null;
+
     abstract public function getMaximum(): int | float | null;
 
     public function getRange(int|float $step = 1): array
@@ -38,10 +40,9 @@ trait RangeTrait
 
         // range throws when used with $step greater then $delta
         if ($min != $max && abs($step) > abs($delta)) {
-            throw new \OutOfRangeException('The range must be higher than the given step parameter');
+            throw new OutOfRangeException('The range must be higher than the given step parameter');
         }
 
         return range($min, $max, $step);
     }
-
 }
