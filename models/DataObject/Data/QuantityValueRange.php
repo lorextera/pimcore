@@ -24,7 +24,7 @@ use Pimcore\Model\DataObject\Traits\ObjectVarTrait;
 
 class QuantityValueRange extends AbstractQuantityValue
 {
-    use ObjectVarTrait;
+    use ObjectVarTrait, Pimcore\Model\DataObject\Traits\RangeTrait;
 
     protected int|float|null $minimum;
 
@@ -64,14 +64,9 @@ class QuantityValueRange extends AbstractQuantityValue
         $this->markMeDirty();
     }
 
-    public function getRange(int $step = 1): array
+    public function getValue(): array
     {
-        return range($this->getMinimum(), $this->getMaximum(), $step);
-    }
-
-    public function getValue(int $step = 1): array
-    {
-        return $this->getRange($step);
+        return [$this->getMinimum(), $this->getMaximum()];
     }
 
     public function toArray(): array
