@@ -16,13 +16,14 @@ declare(strict_types=1);
 
 namespace Pimcore\Bundle\CoreBundle\Controller;
 
+use Exception;
+use Pimcore\Controller\Controller;
 use Pimcore\Tool\Authentication;
 use Pimcore\Tool\StatisticsManager;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Attribute\Route;
-use Pimcore\Controller\Controller;
 
 /**
  * @internal
@@ -30,7 +31,7 @@ use Pimcore\Controller\Controller;
 class StatisticsController extends Controller
 {
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     #[Route('/pimcore-statistics', name: 'pimcore_statistics', methods: ['GET'])]
     public function statisticsAction(Request $request, StatisticsManager $statisticsManager): JsonResponse
