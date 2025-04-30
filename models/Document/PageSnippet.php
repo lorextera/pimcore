@@ -557,7 +557,7 @@ abstract class PageSnippet extends Model\Document
             $url .= $this->getPrettyUrl();
         } else {
             $site = \Pimcore\Tool\Frontend::getSiteForDocument($this);
-            if ($site instanceof Model\Site){
+            if ($site instanceof Model\Site) {
                 $url .= preg_replace('@^'.$site->getRootPath().'/?@', '/', $this->getRealFullPath());
             } else {
                 $url .= $this->getFullPath();
