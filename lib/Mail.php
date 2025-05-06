@@ -774,11 +774,11 @@ class Mail extends Email
         return $this->preventDebugInformationAppending;
     }
 
-    private function html2Text(string $htmlContent): string
+    private function html2Text(?string $htmlContent): string
     {
         $content = '';
 
-        if (!empty($htmlContent)) {
+        if ($htmlContent) {
             try {
                 $converter = new HtmlConverter();
                 $converter->getConfig()->merge($this->getHtml2TextOptions());

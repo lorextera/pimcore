@@ -549,27 +549,34 @@ abstract class PageSnippet extends Model\Document
         }
 
         if (!$hostname) {
-            $hostname = \Pimcore\Config::getSystemConfiguration('general')['domain'];
-            if (empty($hostname)) {
-                if (!$hostname = \Pimcore\Tool::getHostname()) {
-                    throw new Exception('No hostname available');
-                }
-            }
+            $hostname = $this->getHostname();
         }
 
         $url = $scheme . $hostname;
         if ($this instanceof Page && $this->getPrettyUrl()) {
             $url .= $this->getPrettyUrl();
         } else {
-            $url .= $this->getFullPath();
-        }
-
-        $site = \Pimcore\Tool\Frontend::getSiteForDocument($this);
-        if ($site instanceof Model\Site && $site->getMainDomain()) {
-            $url = $scheme . $site->getMainDomain() . preg_replace('@^' . $site->getRootPath() . '/?@', '/', $this->getRealFullPath());
+            $site = \Pimcore\Tool\Frontend::getSiteForDocument($this);
+            if ($site instanceof Model\Site) {
+                $url .= preg_replace('@^'.$site->getRootPath().'/?@', '/', $this->getRealFullPath());
+            } else {
+                $url .= $this->getFullPath();
+            }
         }
 
         return $url;
+    }
+
+    private function getHostname(): string
+    {
+        $site = \Pimcore\Tool\Frontend::getSiteForDocument($this);
+        if ($site instanceof Model\Site && $site->getMainDomain()) {
+            return $site->getMainDomain();
+        }
+
+        return \Pimcore\Config::getSystemConfiguration('general')['domain']
+            ?: \Pimcore\Tool::getHostname()
+            ?: throw new Exception('No hostname available');
     }
 
     /**
