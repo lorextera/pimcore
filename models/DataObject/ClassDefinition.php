@@ -1149,7 +1149,9 @@ final class ClassDefinition extends Model\AbstractModel implements ClassDefiniti
         $customLayouts = $customLayouts->load();
 
         foreach ($customLayouts as $customLayout) {
-            $customLayout->save();
+            if ($customLayout->isWriteable()) {
+                $customLayout->save();
+            }
         }
     }
 
@@ -1169,7 +1171,9 @@ final class ClassDefinition extends Model\AbstractModel implements ClassDefiniti
             }
             $this->deleteDeletedDataComponentsInLayoutDefinition($layoutDefinition);
             $customLayout->setLayoutDefinitions($layoutDefinition);
-            $customLayout->save();
+            if ($customLayout->isWriteable()) {
+                $customLayout->save();
+            }
         }
     }
 

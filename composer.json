@@ -146,7 +146,8 @@
     "php-http/discovery": "<1.20"
   },
   "require-dev": {
-    "codeception/codeception": "^5.0.3",
+    "behat/gherkin": "4.12.0",
+    "codeception/codeception": "^5.2.2",
     "codeception/module-symfony": "^3.1.0",
     "composer/composer": "*",
     "ergebnis/phpstan-rules": "^2.8.0",
