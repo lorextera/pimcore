@@ -75,8 +75,15 @@ jobs:
                     MYSQL_ALLOW_EMPTY_PASSWORD: yes
 
         steps:
-            - name: "Checkout code"
-              uses: "actions/checkout@v2"
+            - name: Checkout PR head (only for pull_request_target)
+              if: github.event_name == 'pull_request_target'
+              uses: "actions/checkout@v4"
+              with:
+                  ref: "refs/pull/${{ github.event.pull_request.number }}/merge"
+
+            - name: Checkout PR head (for push or other events)
+              if: github.event_name != 'pull_request_target'
+              uses: "actions/checkout@v4"
 
             - uses: "actions/setup-node@v3"
               with:
@@ -113,10 +120,11 @@ jobs:
                   fi
 
             - name: "Install dependencies with Composer"
-              uses: "ramsey/composer-install@v2"
+              uses: "ramsey/composer-install@v3"
               with:
                   dependency-versions: "${{ matrix.dependencies }}"
                   composer-options: "${{ matrix.composer-options }}"
+                  ignore-cache: "yes"
 
             - name: "Test environment infos"
               run: |
