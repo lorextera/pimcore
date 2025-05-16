@@ -38,6 +38,18 @@ abstract class Adapter implements AdapterInterface
 
     protected mixed $resource = null;
 
+    private bool $forceProcessICCProfiles = false;
+
+    public function isForceProcessICCProfiles(): bool
+    {
+        return $this->forceProcessICCProfiles;
+    }
+
+    public function setForceProcessICCProfiles(bool $forceProcessICCProfiles): void
+    {
+        $this->forceProcessICCProfiles = $forceProcessICCProfiles;
+    }
+
     public function setHeight(int $height): static
     {
         $this->height = $height;
