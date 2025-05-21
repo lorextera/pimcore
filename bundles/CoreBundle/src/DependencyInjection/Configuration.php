@@ -471,6 +471,7 @@ final class Configuration implements ConfigurationInterface
                                                 ->booleanNode('preserveMetaData')->end()
                                                 ->booleanNode('rasterizeSVG')->end()
                                                 ->booleanNode('downloadable')->end()
+                                                ->booleanNode('forceProcessICCProfiles')->end()
                                                 ->integerNode('modificationDate')->end()
                                                 ->integerNode('creationDate')->end()
                                                 ->booleanNode('preserveAnimation')->end()
