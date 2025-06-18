@@ -47,9 +47,9 @@ use Symfony\Component\Yaml\Yaml;
 )]
 class InstallCommand extends Command
 {
-
     private const string INSTALLER_PRODUCT_REGISTRATION_TMP_STORAGE =
         PIMCORE_SYSTEM_TEMP_DIRECTORY . '/installer_product_registration_tmp_storage.yaml';
+
     private PimcoreStyle $io;
 
     private ?array $options = null;
@@ -529,7 +529,8 @@ class InstallCommand extends Command
         $this->registrationValidator->validateProductKey($productKey);
     }
 
-    private function saveProductRegistrationValuesToTmpStorage(InputInterface $input): void {
+    private function saveProductRegistrationValuesToTmpStorage(InputInterface $input): void
+    {
 
         $data = [
             'encryption_secret' => $input->getOption('encryption-secret'),
