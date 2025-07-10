@@ -700,10 +700,10 @@ final class Requirements
         if (count($data) > 2000) {
             throw new Exception('limit of 2000 files reached');
         }
-        
+
         $base_dirs = scandir($base);
         if ($base_dirs === false) {
-             throw new Exception('not a directory: ' . $base);
+            throw new Exception('not a directory: ' . $base);
         }
 
         $array = array_diff($base_dirs, ['.', '..', '.svn', '.git']);
