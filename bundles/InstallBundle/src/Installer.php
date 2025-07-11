@@ -790,7 +790,10 @@ class Installer
                 }
             }
 
-            $db->executeStatement(implode("\n", $batchQueries));
+            // process remaining queries
+            if (count($batchQueries) > 0) {
+                $db->executeStatement(implode("\n", $batchQueries));
+            }
         }
     }
 
