@@ -459,7 +459,7 @@ class Service extends Model\AbstractModel
 
     /**
      * @internal
-     * 
+     *
      * @return array{force: bool, ...}
      */
     public static function prepareGetByIdParams(array $params): array
