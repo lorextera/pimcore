@@ -16,6 +16,7 @@ namespace Pimcore\Bundle\SimpleBackendSearchBundle\Controller;
 use Doctrine\DBAL\Exception\SyntaxErrorException;
 use Exception;
 use InvalidArgumentException;
+use JsonException;
 use Pimcore;
 use Pimcore\Bundle\AdminBundle\Event\AdminEvents;
 use Pimcore\Bundle\AdminBundle\Event\ElementAdminStyleEvent;
@@ -32,7 +33,6 @@ use Pimcore\Extension\Bundle\Exception\AdminClassicBundleNotFoundException;
 use Pimcore\Model\Asset;
 use Pimcore\Model\DataObject;
 use Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields;
-use Pimcore\Model\DataObject\Objectbrick\Definition;
 use Pimcore\Model\Document;
 use Pimcore\Model\Element;
 use Pimcore\Model\Element\AdminStyle;
@@ -52,12 +52,14 @@ class SearchController extends UserAwareController
     use JsonHelperTrait;
 
     /**
-     * @throws \JsonException
+     * @throws JsonException
+     *
      * @todo: $conditionSubtypeParts could be undefined
      *
      * @todo: $conditionClassnameParts could be undefined
      *
      * @todo: $data could be undefined
+     *
      * @todo: $conditionTypeParts could be undefined
      *
      */
@@ -653,7 +655,7 @@ class SearchController extends UserAwareController
     }
 
     /**
-     * @throws \JsonException
+     * @throws JsonException
      */
     private function parseBricks(array $fields): array
     {
@@ -670,7 +672,7 @@ class SearchController extends UserAwareController
     }
 
     /**
-     * @throws \JsonException
+     * @throws JsonException
      */
     private function getBrickData(string $fieldName): ?string
     {
@@ -696,7 +698,7 @@ class SearchController extends UserAwareController
     }
 
     /**
-     * @throws \JsonException
+     * @throws JsonException
      */
     private function isBrick(string $fieldName): bool
     {
@@ -704,7 +706,7 @@ class SearchController extends UserAwareController
     }
 
     /**
-     * @throws \JsonException
+     * @throws JsonException
      */
     private function isLocalizedFieldBrick(string $fieldName): bool
     {
@@ -716,16 +718,15 @@ class SearchController extends UserAwareController
         return str_starts_with(
             $parts[0],
             '?'
-            ) &&
+        ) &&
             isset(json_decode(
-                    substr(
-                        $parts[0],
-                        1
-                    ),
-                    true,
-                    512,
-                    JSON_THROW_ON_ERROR
-                )
-                ['containerKey']);
+                substr(
+                    $parts[0],
+                    1
+                ),
+                true,
+                512,
+                JSON_THROW_ON_ERROR
+            )['containerKey']);
     }
 }
