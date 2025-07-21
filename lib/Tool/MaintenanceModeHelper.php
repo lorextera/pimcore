@@ -26,6 +26,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class MaintenanceModeHelper implements MaintenanceModeHelperInterface
 {
     protected const ENTRY_ID = 'maintenance_mode';
+
     protected const OFF = 'OFF';
 
     public function __construct(protected RequestStack $requestStack, protected Connection $db)
@@ -74,7 +75,7 @@ class MaintenanceModeHelper implements MaintenanceModeHelperInterface
     protected function getEntry(): ?string
     {
         $entryId = Cache::load(self::ENTRY_ID);
-        if ($entryId){
+        if ($entryId) {
             // If the entry is set to OFF, we return null to indicate that maintenance mode is not active
             return $entryId === self::OFF ? null : $entryId;
         }
@@ -95,6 +96,7 @@ class MaintenanceModeHelper implements MaintenanceModeHelperInterface
         }
         // We set the cache entry to OFF if it isn't set, to avoid unnecessary database calls in the future
         Cache::save($entryValue ?? self::OFF, self::ENTRY_ID, lifetime: null);
+
         return $entryValue;
     }
 
