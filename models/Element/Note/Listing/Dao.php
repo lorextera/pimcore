@@ -64,9 +64,9 @@ class Dao extends Model\Listing\Dao\AbstractDao
         }
 
         $keyValues = $this->db->fetchAllAssociative(
-        	'SELECT * FROM notes_data WHERE id IN (?)', 
-        	[$ids],
-        	[\Doctrine\DBAL\ArrayParameterType::INTEGER],
+            'SELECT * FROM notes_data WHERE id IN (?)',
+            [$ids],
+            [\Doctrine\DBAL\ArrayParameterType::INTEGER],
         );
 
         $list = [];
