@@ -29,7 +29,7 @@ final class Version20250526125951 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        if(!$schema->hasTable('redirects')) {
+        if (!$schema->hasTable('redirects')) {
             return;
         }
 
@@ -38,7 +38,7 @@ final class Version20250526125951 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        if(!$schema->hasTable('redirects')) {
+        if (!$schema->hasTable('redirects')) {
             return;
         }
 
