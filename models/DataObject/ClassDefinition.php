@@ -351,8 +351,7 @@ final class ClassDefinition extends Model\AbstractModel implements ClassDefiniti
      */
     public function generateClassFiles(
         bool $generateDefinitionFile = true
-    ): void
-    {
+    ): void {
         $this->generateClassFilesInternal($generateDefinitionFile);
     }
 
@@ -1142,8 +1141,7 @@ final class ClassDefinition extends Model\AbstractModel implements ClassDefiniti
     private function saveClassInternal(
         bool $saveDefinitionFile = true,
         bool $dumpPHPClasses = true
-    ): void
-    {
+    ): void {
         if ($saveDefinitionFile && !$this->isWritable()) {
             throw new DataObject\Exception\DefinitionWriteException();
         }
@@ -1228,6 +1226,7 @@ final class ClassDefinition extends Model\AbstractModel implements ClassDefiniti
             $this->updateCustomLayouts();
         }
     }
+
     /**
      *
      * @throws Exception
@@ -1237,9 +1236,8 @@ final class ClassDefinition extends Model\AbstractModel implements ClassDefiniti
     private function generateClassFilesInternal(
         bool $generateDefinitionFile = true,
         bool $dumpPHPClasses = true
-    ): void
-    {
-        if($dumpPHPClasses) {
+    ): void {
+        if ($dumpPHPClasses) {
             Pimcore::getContainer()->get(PHPClassDumperInterface::class)->dumpPHPClasses($this);
         }
 

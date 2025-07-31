@@ -121,19 +121,19 @@ class Definition extends Model\AbstractModel
      */
     public function save(bool $saveDefinitionFile = true): void
     {
-       $this->saveInternal($saveDefinitionFile);
+        $this->saveInternal($saveDefinitionFile);
     }
 
     /**
      * Additional method that gives more control over the saving process. Added as a separate method to avoid compatibility issues.
      * TODO: Should be refactored in Pimcore 13 to avoid duplication with save.
+     *
      * @throws Exception
      */
     public function dump(
         bool $saveDefinitionFile = true,
         bool $dumpPHPClasses = true
-    ): void
-    {
+    ): void {
         $this->saveInternal($saveDefinitionFile, $dumpPHPClasses);
     }
 
@@ -146,8 +146,7 @@ class Definition extends Model\AbstractModel
     protected function generateClassFiles(
         bool $generateDefinitionFile = true,
         bool $dumpPHPClasses = true
-    ): void
-    {
+    ): void {
         if ($generateDefinitionFile && !$this->isWritable()) {
             throw new DataObject\Exception\DefinitionWriteException();
         }
@@ -174,7 +173,7 @@ class Definition extends Model\AbstractModel
             $filesystem->dumpFile($definitionFile, $data);
         }
 
-        if($dumpPHPClasses) {
+        if ($dumpPHPClasses) {
             Pimcore::getContainer()->get(PHPFieldCollectionClassDumperInterface::class)->dumpPHPClass($this);
         }
 
@@ -276,8 +275,7 @@ class Definition extends Model\AbstractModel
     protected function saveInternal(
         bool $saveDefinitionFile = true,
         bool $dumpPHPClasses = true
-    ): void
-    {
+    ): void {
         if (!$this->getKey()) {
             throw new Exception('A field-collection needs a key to be saved!');
         }

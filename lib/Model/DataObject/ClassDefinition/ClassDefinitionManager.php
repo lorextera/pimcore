@@ -118,8 +118,7 @@ class ClassDefinitionManager
         bool $saveDefinitionFile,
         bool $dumpPHPClasses,
         bool $force = false
-    ): bool
-    {
+    ): bool {
         return $this->saveClassDefinition($class, $saveDefinitionFile, $dumpPHPClasses, $force);
     }
 
@@ -132,8 +131,7 @@ class ClassDefinitionManager
         bool $saveDefinitionFile,
         bool $dumpPHPClasses = true,
         bool $force = false
-    ): bool
-    {
+    ): bool {
         $shouldSave = $force;
 
         if (!$force) {
@@ -151,7 +149,7 @@ class ClassDefinitionManager
         }
 
         if ($shouldSave) {
-            if($class instanceof ClassDefinition) {
+            if ($class instanceof ClassDefinition) {
                 $class->dumpClass($saveDefinitionFile, $dumpPHPClasses);
             } else {
                 $class->save($saveDefinitionFile);

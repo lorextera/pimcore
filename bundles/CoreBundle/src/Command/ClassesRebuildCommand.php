@@ -183,7 +183,7 @@ class ClassesRebuildCommand extends AbstractCommand
             $output->writeln('Saving all select options');
         }
 
-        if($dumpPHPClasses) {
+        if ($dumpPHPClasses) {
             $selectOptionConfigurations = new DataObject\SelectOptions\Config\Listing();
             foreach ($selectOptionConfigurations as $selectOptionConfiguration) {
                 if ($output->isVerbose()) {
@@ -192,8 +192,7 @@ class ClassesRebuildCommand extends AbstractCommand
 
                 $selectOptionConfiguration->generateEnumFiles();
             }
-        }
-        else {
+        } else {
             $output->writeln('<comment>Skipping select options generation, because --db-only option is set.</comment>');
         }
 

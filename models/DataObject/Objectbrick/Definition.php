@@ -139,7 +139,7 @@ class Definition extends Model\DataObject\Fieldcollection\Definition
      */
     public function save(bool $saveDefinitionFile = true): void
     {
-       $this->saveInternal($saveDefinitionFile);
+        $this->saveInternal($saveDefinitionFile);
     }
 
     /**
@@ -173,8 +173,7 @@ class Definition extends Model\DataObject\Fieldcollection\Definition
     protected function generateClassFiles(
         bool $generateDefinitionFile = true,
         bool $dumpPHPClasses = true
-    ): void
-    {
+    ): void {
         if ($generateDefinitionFile && !$this->isWritable()) {
             throw new DataObject\Exception\DefinitionWriteException();
         }
@@ -205,7 +204,7 @@ class Definition extends Model\DataObject\Fieldcollection\Definition
             $filesystem->dumpFile($definitionFile, $data);
         }
 
-        if($dumpPHPClasses) {
+        if ($dumpPHPClasses) {
             Pimcore::getContainer()?->get(PHPObjectBrickClassDumperInterface::class)?->dumpPHPClasses($this);
         }
     }
@@ -507,8 +506,7 @@ class Definition extends Model\DataObject\Fieldcollection\Definition
     protected function saveInternal(
         bool $saveDefinitionFile = true,
         bool $dumpPHPClasses = true
-    ): void
-    {
+    ): void {
         if (!$this->getKey()) {
             throw new Exception('A object-brick needs a key to be saved!');
         }
