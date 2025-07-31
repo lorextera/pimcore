@@ -63,7 +63,6 @@ class Dao extends Model\Dao\AbstractDao
 
         $sql .= ' AND (sourceSite IS NULL OR sourceSite = '. ($siteId ?? 0) .')';
 
-
         if ($override) {
             $sql .= ' AND priority = 99';
         }
