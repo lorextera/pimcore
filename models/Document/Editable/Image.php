@@ -179,6 +179,7 @@ class Image extends Model\Document\Editable implements IdRewriterInterface, Edit
                 'marker' => $marker,
                 'thumbnail' => $this->thumbnail,
                 'predefinedDataTemplates' => $this->getConfig()['predefinedDataTemplates'] ?? null,
+                'imgAttributes' => $this->getConfig()['imgAttributes'] ?? null,
             ];
         }
 
@@ -398,7 +399,6 @@ class Image extends Model\Document\Editable implements IdRewriterInterface, Edit
     }
 
     /**
-     *
      * @return $this
      */
     public function setId(?int $id): static
@@ -684,7 +684,6 @@ class Image extends Model\Document\Editable implements IdRewriterInterface, Edit
      * used for non-nullable properties stored with null
      *
      * @TODO: Remove in Pimcore 12
-     *
      */
     public function __unserialize(array $data): void
     {
