@@ -44,3 +44,6 @@ jobs:
         with:
           composer-options: "--no-scripts --optimize-autoloader"
 
+      - name: Restore composer.json
+        run: git restore composer.json
+
