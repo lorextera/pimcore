@@ -21,7 +21,7 @@ final class JobStep implements JobStepInterface
         private readonly string $name,
         private readonly string $messageFQCN,
         private readonly string $condition,
-        private readonly array  $config,
+        private readonly array $config,
         private readonly SelectionProcessingMode $selectionProcessingMode = SelectionProcessingMode::FOR_EACH,
         private JobStepStates $jobStepState = JobStepStates::NOT_STARTED,
     ) {
@@ -57,7 +57,8 @@ final class JobStep implements JobStepInterface
         return $this->jobStepState;
     }
 
-    public function setState(JobStepStates $state): void {
+    public function setState(JobStepStates $state): void
+    {
         $this->jobStepState = $state;
     }
 }

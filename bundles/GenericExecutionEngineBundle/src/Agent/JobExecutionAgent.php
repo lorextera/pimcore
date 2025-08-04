@@ -415,7 +415,7 @@ final class JobExecutionAgent implements JobExecutionAgentInterface
 
         $totalStepsCount = count($jobRunSteps);
         $failedStepsCount = count(
-                array_filter($jobRunSteps,
+            array_filter($jobRunSteps,
                 static fn ($step) => $step->getState() === JobStepStates::FAILED
             )
         );
@@ -478,7 +478,8 @@ final class JobExecutionAgent implements JobExecutionAgentInterface
         }
     }
 
-    private function setJobStepState(JobRun|JobStep $jobElement, JobStepStates $jobStepState): void {
+    private function setJobStepState(JobRun|JobStep $jobElement, JobStepStates $jobStepState): void
+    {
         $currentJobStep = $jobElement instanceof JobStep ?
             $jobElement : $jobElement->getJob()?->getSteps()[$jobElement->getCurrentStep()] ?? null;
 
@@ -487,7 +488,7 @@ final class JobExecutionAgent implements JobExecutionAgentInterface
         }
 
         $currentJobStepState = $currentJobStep->getState();
-        if($currentJobStepState === JobStepStates::FAILED) {
+        if ($currentJobStepState === JobStepStates::FAILED) {
             return;
         }
 
