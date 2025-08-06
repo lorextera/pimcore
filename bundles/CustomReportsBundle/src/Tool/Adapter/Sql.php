@@ -174,7 +174,6 @@ class Sql extends AbstractAdapter
 
                     break;
                 case '=':
-                case '==':
                     $fields[] = $filter['property'];
                     $condition[] = $db->quoteIdentifier($filter['property']) . ' = ' . $db->quote($value);
 

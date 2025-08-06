@@ -182,7 +182,6 @@ class Image extends Model\Document\Editable implements IdRewriterInterface, Edit
                 'marker' => $marker,
                 'thumbnail' => $this->thumbnail,
                 'predefinedDataTemplates' => $this->getConfig()['predefinedDataTemplates'] ?? null,
-                'imgAttributes' => $this->getConfig()['imgAttributes'] ?? [],
             ];
         }
 
