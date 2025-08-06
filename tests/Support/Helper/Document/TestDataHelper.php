@@ -124,18 +124,18 @@ class TestDataHelper extends AbstractTestDataHelper
         /** @var Image $editable */
         $editable = $pagesnippet->getEditable($field);
         $this->assertInstanceOf(Image::class, $editable);
-        
+
         // Test basic image functionality
         $value = $editable->getImage();
         $this->assertInstanceOf(\Pimcore\Model\Asset\Image::class, $value);
         $expectedImage = $params['asset'];
         $this->assertEquals($expectedImage->getId(), $value->getId());
-        
+
         // Test that imgAttributes are included in editmode data
         $editmodeData = $editable->getDataEditmode();
         $this->assertIsArray($editmodeData);
         $this->assertArrayHasKey('imgAttributes', $editmodeData);
-        
+
         $expectedImgAttributes = $params['expectedImgAttributes'];
         $this->assertEquals($expectedImgAttributes, $editmodeData['imgAttributes']);
     }
@@ -450,7 +450,7 @@ class TestDataHelper extends AbstractTestDataHelper
             'imgAttributes' => [
                 'class' => 'aspect-[16/9] w-full object-cover',
                 'data-test' => 'test-value' . $seed,
-            ]
+            ],
         ]);
         $returnData = [
             'asset' => $asset,

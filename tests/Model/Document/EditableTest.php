@@ -90,7 +90,7 @@ class EditableTest extends ModelTestCase
             [
                 'method' => 'fillImageWithImgAttributes',
                 'field' => 'image_with_attributes',
-            ]
+            ],
         ], $returnData);
 
         $this->reloadPage();
