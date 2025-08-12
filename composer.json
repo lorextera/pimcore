@@ -125,7 +125,7 @@
     "tijsverkoyen/css-to-inline-styles": "^2.2.3",
     "twig/extra-bundle": "^3.4.0",
     "twig/string-extra": "^3.3.5",
-    "twig/twig": "^3.3.9",
+    "twig/twig": "^3.21.1",
     "umpirsky/country-list": "^2.0.6"
   },
   "conflict": {
@@ -137,8 +137,7 @@
     "phpstan/phpdoc-parser": ">=2.0",
     "sabre/dav": "4.2.2",
     "symfony/symfony": "*",
-    "thecodingmachine/safe": "<2.0",
-    "twig/twig": ">=3.9.0 <3.14.0"
+    "thecodingmachine/safe": "<2.0"
   },
   "require-dev": {
     "behat/gherkin": "4.12.0",
