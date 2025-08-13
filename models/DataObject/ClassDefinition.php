@@ -16,7 +16,6 @@ namespace Pimcore\Model\DataObject;
 use Exception;
 use Pimcore;
 use Pimcore\Cache;
-use Pimcore\Cache\RuntimeCache;
 use Pimcore\DataObject\ClassBuilder\FieldDefinitionDocBlockBuilderInterface;
 use Pimcore\DataObject\ClassBuilder\PHPClassDumperInterface;
 use Pimcore\Db;
