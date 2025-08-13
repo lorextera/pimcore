@@ -393,7 +393,7 @@ class AdvancedManyToManyRelation extends ManyToManyRelation implements IdRewrite
             $params['fd'] = $object->getClass()->getFieldDefinition($this->getName(), $params['context'] ?? []);
             foreach ($gridData as &$relatedElementData) {
                 $nicePath = $this->getNicePath($relatedElementData, $object, $params);
-                if ($nicePath){
+                if ($nicePath) {
                     $relatedElementData['path'] = $nicePath;
                 }
             }

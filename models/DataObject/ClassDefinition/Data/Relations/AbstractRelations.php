@@ -398,7 +398,7 @@ abstract class AbstractRelations extends Data implements
                 $this->getPathFormatterClass()
             );
 
-            if($pathFormatter instanceof DataObject\ClassDefinition\PathFormatterInterface) {
+            if ($pathFormatter instanceof DataObject\ClassDefinition\PathFormatterInterface) {
                 return $pathFormatter->formatPath([], $object, [$gridData], $params)[0];
             }
         }
