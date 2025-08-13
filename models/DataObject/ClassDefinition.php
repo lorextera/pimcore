@@ -212,13 +212,13 @@ final class ClassDefinition extends Model\AbstractModel implements ClassDefiniti
         $cacheKey = 'class_' . $id;
         $class = null;
 
-        if(!$force &&
+        if (!$force &&
             RuntimeCache::isRegistered($cacheKey)
         ) {
             $class = RuntimeCache::get($cacheKey);
         }
 
-        if($class !== null) {
+        if ($class !== null) {
             return $class;
         }
 
