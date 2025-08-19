@@ -853,7 +853,6 @@ final class Config extends Model\AbstractModel
     /**
      * @internal
      *
-     * @return integer
      */
     public static function getMaxDpiFactor(): int
     {
