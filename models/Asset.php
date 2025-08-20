@@ -622,6 +622,8 @@ class Asset extends Element\AbstractElement
 
             return $this;
         } catch (Exception $e) {
+            // TODO: we should rollback any files that were moved here,
+            // assuming a prior revert has not been done.
             $failureEvent = new AssetEvent($this, $parameters);
             $failureEvent->setArgument('exception', $e);
             if ($isUpdate) {
@@ -1683,8 +1685,12 @@ class Asset extends Element\AbstractElement
     /**
      * @throws FilesystemException
      */
-    private function updateChildPaths(FilesystemOperator $storage, string $oldPath, string $newPath = null): void
-    {
+    private function updateChildPaths(
+        FilesystemOperator $storage,
+        string $oldPath,
+        ?string $newPath = null,
+        bool $skipError = false
+    ): void {
         if ($newPath === null) {
             $newPath = $this->getRealFullPath();
         }
@@ -1703,6 +1709,9 @@ class Asset extends Element\AbstractElement
 
             $storage->deleteDirectory($oldPath);
         } catch (UnableToMoveFile $e) {
+            if ($skipError) {
+                return;
+            }
             // rollback moved files
             foreach ($movedFiles as $src => $dest) {
                 $storage->move($src, $dest);
@@ -1746,7 +1755,8 @@ class Asset extends Element\AbstractElement
                     $storage->move($oldThumbnailsPath, $newThumbnailsPath);
                 } catch (UnableToMoveFile $e) {
                     //update children, if unable to move parent
-                    $this->updateChildPaths($storage, $oldPath);
+                    //if there is an error, we can ignore it
+                    $this->updateChildPaths($storage, $oldPath, null, true);
                 }
             }
         }
