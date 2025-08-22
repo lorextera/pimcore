@@ -134,6 +134,11 @@ ORDER BY TABLE_NAME;
 - add function `getPagination` to `bundles/CustomReportsBundle/src/Tool/Adapter/CustomReportAdapterInterface.php`
 - change parameter types of `getData` in `bundles/CustomReportsBundle/src/Tool/Adapter/AbstractAdapter.php`
 
+## Pimcore 11.5.9
+### Security
+#### [Twig]
+- Bumped minimum requirement of `twig/twig` to `^3.21.0` to fix security and issues with `pimcoremanualblock`
+
 ## Pimcore 11.5.5
 ### General
 #### [Database]
@@ -147,6 +152,7 @@ ORDER BY TABLE_NAME;
 - Added an index on `versionCount` columns
 #### [Events]
 - `context` property of `ResolveUploadTargetEvent` is deprecated. Use `setArgument()` method instead.
+#### [Twig Extension Deprecations]
 - `pimcore_block` Twig extension is deprecated. Use `pimcoreblock` or `pimcoremanualblock` instead.
 #### [Controllers]
 - Replaced all `$request->get()` with their explicit input source.
@@ -264,12 +270,12 @@ pimcore:
 - Bumped Symfony packages to "^6.4".
 #### [Value Objects]
 - Added new self validating Value Objects:
-  - `Pimcore\ValueObject\BooleanArray`
-  - `Pimcore\ValueObject\IntegerArray`
-  - `Pimcore\ValueObject\Path`
-  - `Pimcore\ValueObject\PositiveInteger`
-  - `Pimcore\ValueObject\PositiveIntegerArray`
-  - `Pimcore\ValueObject\StringArray`
+  - `Pimcore\ValueObject\String\Path`
+  - `Pimcore\ValueObject\Integer\PositiveInteger`
+  - `Pimcore\ValueObject\Collection\ArrayOfBoolean`
+  - `Pimcore\ValueObject\Collection\ArrayOfIntegers`
+  - `Pimcore\ValueObject\Collection\ArrayOfPositiveIntegers`
+  - `Pimcore\ValueObject\Collection\ArrayOfStrings`
 
 > [!WARNING]  
 > For [environment variable consistency purposes](https://github.com/pimcore/pimcore/issues/16638) in boostrap, please fix `public/index.php` in project root by moving `Bootstrap::bootstrap();` just above `$kernel = Bootstrap::kernel()` line instead of outside the closure.
