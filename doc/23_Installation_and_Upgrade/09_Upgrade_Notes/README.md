@@ -157,6 +157,11 @@ ORDER BY TABLE_NAME;
 - add function `getPagination` to `bundles/CustomReportsBundle/src/Tool/Adapter/CustomReportAdapterInterface.php`
 - change parameter types of `getData` in `bundles/CustomReportsBundle/src/Tool/Adapter/AbstractAdapter.php`
 
+## Pimcore 11.5.9
+### Security
+#### [Twig]
+- Bumped minimum requirement of `twig/twig` to `^3.21.0` to fix security and issues with `pimcoremanualblock`
+
 ## Pimcore 11.5.5
 ### General
 #### [Database]
