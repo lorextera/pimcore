@@ -56,7 +56,7 @@ class Dao extends Model\Listing\Dao\AbstractDao
                 $classData['name'],
                 $this->model->getForce()
             );
-            if($class) {
+            if ($class) {
                 $classes[] = $class;
             }
         }
