@@ -23,6 +23,7 @@ trait QueryBuilderHelperTrait
      * @var callable|null
      *
      * @deprecated Since 12.2.0, use $queryBuilderProcessors instead, add processors via addQueryBuilderProcessor()
+     *
      * @todo Remove in Pimcore 13
      */
     protected $onCreateQueryBuilderCallback;
