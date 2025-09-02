@@ -190,8 +190,7 @@ class ElementListener implements EventSubscriberInterface, LoggerAwareInterface
         User $user,
         SessionInterface $session,
         bool $isPimcoreStudio
-    ): Document
-    {
+    ): Document {
         if (!$isPimcoreStudio) {
             // check if there is the document in the session (for admin classic UI)
             $documentFromSession = Document\Service::getElementFromSession('document', $document->getId(), $session->getId());
@@ -200,6 +199,7 @@ class ElementListener implements EventSubscriberInterface, LoggerAwareInterface
                 $this->logger->debug('Loading editmode document {document} from session', [
                     'document' => $document->getFullPath(),
                 ]);
+
                 return $documentFromSession;
             }
         }
