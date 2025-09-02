@@ -29,6 +29,7 @@ use Pimcore\Model;
 use Pimcore\Model\Element\Traits\DirtyIndicatorTrait;
 use Pimcore\Model\User;
 use Pimcore\Workflow\Manager;
+use Throwable;
 
 /**
  * @method Model\Document\Dao|Model\Asset\Dao|Model\DataObject\AbstractObject\Dao getDao()
@@ -762,7 +763,7 @@ abstract class AbstractElement extends Model\AbstractModel implements ElementInt
                     }
 
                     break; // transaction was successfully completed, so we cancel the loop here -> no restart required
-                } catch (\Throwable $e) {
+                } catch (Throwable $e) {
                     try {
                         $this->rollBack();
                     } catch (Exception $er) {
