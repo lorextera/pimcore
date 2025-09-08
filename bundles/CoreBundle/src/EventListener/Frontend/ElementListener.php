@@ -263,6 +263,7 @@ class ElementListener implements EventSubscriberInterface, LoggerAwareInterface
             $this->logger->debug('Loading preview document {document} from session', [
                 'document' => $document->getFullPath(),
             ]);
+
             return $documentFromSession;
         }
 
