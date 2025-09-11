@@ -756,5 +756,4 @@ final class User extends User\UserRole implements UserInterface
     {
         return $this->lastPasswordReset;
     }
-
 }

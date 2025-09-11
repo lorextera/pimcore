@@ -21,6 +21,7 @@ use Pimcore\Cache\RuntimeCache;
 final class Version20250908143245 extends AbstractMigration
 {
     const CACHEKEY = 'system_resource_columns_';
+
     public function getDescription(): string
     {
         return 'Add lastPasswordReset column with default CURRENT_TIMESTAMP to users table';
