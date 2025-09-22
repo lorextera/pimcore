@@ -1053,7 +1053,7 @@ class Model extends AbstractDefinitionHelper
         Autoloader::load(Redirect::class);
     }
 
-    private function installSimpleBackendSearchBundle(): void 
+    private function installSimpleBackendSearchBundle(): void
     {
         /** @var Pimcore $pimcoreModule */
         $pimcoreModule = $this->getModule('\\'.Pimcore::class);
