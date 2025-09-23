@@ -107,6 +107,8 @@ abstract class AbstractElement extends Model\AbstractModel implements ElementInt
      */
     protected ?int $parentId = null;
 
+    private static bool $getInheritedProperties = true;
+
     public function getPath(): ?string
     {
         return $this->path;
@@ -164,10 +166,8 @@ abstract class AbstractElement extends Model\AbstractModel implements ElementInt
 
     public function setModificationDate(int $modificationDate): static
     {
-        if ($this->modificationDate != $modificationDate) {
-            $this->markFieldDirty('modificationDate');
-            $this->modificationDate = $modificationDate;
-        }
+        $this->markFieldDirty('modificationDate');
+        $this->modificationDate = $modificationDate;
 
         return $this;
     }
@@ -243,7 +243,14 @@ abstract class AbstractElement extends Model\AbstractModel implements ElementInt
             $this->properties = $properties;
         }
 
-        return $this->properties;
+        $properties = $this->properties;
+        if (!static::getGetInheritedProperties()) {
+            $properties = array_filter($properties, static function (Model\Property $property) {
+                return !$property->isInherited();
+            });
+        }
+
+        return $properties;
     }
 
     public function setProperties(?array $properties): static
@@ -281,6 +288,16 @@ abstract class AbstractElement extends Model\AbstractModel implements ElementInt
         $this->setProperties($properties);
 
         return $this;
+    }
+
+    public static function setGetInheritedProperties(bool $getInheritedProperties): void
+    {
+        self::$getInheritedProperties = $getInheritedProperties;
+    }
+
+    public static function getGetInheritedProperties(): bool
+    {
+        return self::$getInheritedProperties;
     }
 
     /**
