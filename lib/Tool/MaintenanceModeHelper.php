@@ -75,6 +75,7 @@ class MaintenanceModeHelper implements MaintenanceModeHelperInterface
     protected function getEntry(): ?string
     {
         $tmpStore = null;
+
         try {
             $entryId = Cache::load(self::ENTRY_ID);
             if ($entryId) {
