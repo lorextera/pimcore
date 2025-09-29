@@ -52,6 +52,8 @@ use Pimcore\Tool\Storage;
 use stdClass;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Lock\LockFactory;
+use Symfony\Component\Lock\LockInterface;
 
 /**
  * @method Dao getDao()
@@ -64,6 +66,8 @@ class Asset extends Element\AbstractElement
 {
     use ScheduledTasksTrait;
     use TemporaryFileHelperTrait;
+
+    public const CUSTOM_SETTING_PROCESSING_FAILED = 'pimcore-asset-processing-failed';
 
     /**
      * @internal
@@ -567,7 +571,7 @@ class Asset extends Element\AbstractElement
                 $this->addToDependenciesQueue();
 
                 if ($this->getDataChanged()) {
-                    if (in_array($this->getType(), ['image', 'video', 'document'])) {
+                    $this->removeCustomSetting(Asset::CUSTOM_SETTING_PROCESSING_FAILED);if (in_array($this->getType(), ['image', 'video', 'document'])) {
                         $this->addToUpdateTaskQueue();
                     }
                 }
@@ -1740,12 +1744,36 @@ class Asset extends Element\AbstractElement
 
     /**
      * @internal
+     * public because it's also used by pimcore/admin-ui-classic-bundle
      */
-    protected function addToUpdateTaskQueue(): void
+    public function addToUpdateTaskQueue(): void
     {
-        Pimcore::getContainer()->get('messenger.bus.pimcore-core')->dispatch(
-            new AssetUpdateTasksMessage($this->getId())
-        );
+        if (!$this->getCustomSetting(self::CUSTOM_SETTING_PROCESSING_FAILED)) {
+            $this->triggerUpdateTask();
+        }
+    }
+
+    /**
+     * @internal
+     */
+    public function triggerUpdateTask(): void
+    {
+        /** @var LockInterface $lock */
+        $lock = Pimcore::getContainer()->get(LockFactory::class)->createLock($this->getUpdateQueueLockId());
+        if ($lock->acquire()) {
+            $bus = Pimcore::getContainer()->get('messenger.bus.pimcore-core');
+            $message = new AssetUpdateTasksMessage($this->getId());
+
+            $bus->dispatch($message);
+        }
+    }
+
+    /**
+     * @internal
+     */
+    public function getUpdateQueueLockId(): string
+    {
+        return 'asset-update-queue-' . $this->getId();
     }
 
     public function getFrontendPath(): string
