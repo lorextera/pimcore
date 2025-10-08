@@ -262,7 +262,7 @@ class RgbaColor extends Data implements
         $db = \Pimcore\Db::get();
         $name = $key = $params['name'] ? $params['name'] : $this->name;
 
-        if (!str_starts_with($name, 'cskey_')){
+        if (!str_starts_with($name, 'cskey_')) {
             $key = 'concat(' . $db->quoteIdentifier($name  . '__rgb') .' ,'
             . $db->quoteIdentifier($name  . '__a') .')';
         }
