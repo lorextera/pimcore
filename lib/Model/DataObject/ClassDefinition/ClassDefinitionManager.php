@@ -145,7 +145,6 @@ class ClassDefinitionManager
         return !$definitionModificationDate || $definitionModificationDate !== $class->getModificationDate();
     }
 
-
     /**
      * @throws Exception
      * @throws DefinitionWriteException

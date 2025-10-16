@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Pimcore\Bundle\CoreBundle\Command;
 
+use InvalidArgumentException;
 use Pimcore\Cache;
 use Pimcore\Console\AbstractCommand;
 use Pimcore\Model\DataObject;
@@ -32,8 +33,7 @@ class ClassesDefinitionsChangesCommand extends AbstractCommand
 {
     public function __construct(
         protected ClassDefinitionManager $classDefinitionManager
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -51,6 +51,7 @@ class ClassesDefinitionsChangesCommand extends AbstractCommand
                 $name = $this->extractClassName($file, $linesToRead);
                 if (!$name) {
                     $output->writeln("Name not found in $file");
+
                     continue;
                 }
 
@@ -67,7 +68,7 @@ class ClassesDefinitionsChangesCommand extends AbstractCommand
         }
 
         if (!$changes) {
-            $output->writeln("No changes found");
+            $output->writeln('No changes found');
         }
 
         return 0;
@@ -110,7 +111,7 @@ class ClassesDefinitionsChangesCommand extends AbstractCommand
         $lines = [];
 
         if (!file_exists($filename)) {
-            throw new \InvalidArgumentException("File does not exist: $filename");
+            throw new InvalidArgumentException("File does not exist: $filename");
         }
 
         $handle = fopen($filename, 'r');
@@ -123,6 +124,6 @@ class ClassesDefinitionsChangesCommand extends AbstractCommand
             fclose($handle);
         }
 
-        return implode("", $lines);
+        return implode('', $lines);
     }
 }
