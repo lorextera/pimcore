@@ -14,17 +14,17 @@ declare(strict_types=1);
 namespace Pimcore\Translation;
 
 use Exception;
-use Pimcore\Tool;
 use Pimcore\Cache;
 use Pimcore\Model\Translation;
-use Symfony\Component\Translation\MessageCatalogue;
-use Symfony\Contracts\Translation\TranslatorInterface;
-use Symfony\Contracts\Translation\LocaleAwareInterface;
-use Symfony\Component\Translation\TranslatorBagInterface;
-use Symfony\Component\Translation\Exception\LogicException;
-use Symfony\Component\Translation\MessageCatalogueInterface;
+use Pimcore\Tool;
 use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
 use Symfony\Component\Translation\Exception\InvalidArgumentException;
+use Symfony\Component\Translation\Exception\LogicException;
+use Symfony\Component\Translation\MessageCatalogue;
+use Symfony\Component\Translation\MessageCatalogueInterface;
+use Symfony\Component\Translation\TranslatorBagInterface;
+use Symfony\Contracts\Translation\LocaleAwareInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class Translator implements TranslatorInterface, TranslatorBagInterface, LocaleAwareInterface, WarmableInterface
 {

@@ -12,10 +12,10 @@
 
 namespace Pimcore\Bundle\SeoBundle\Controller;
 
-use Pimcore\Helper\ParameterBagHelper;
 use Pimcore\Controller\Traits\JsonHelperTrait;
 use Pimcore\Controller\UserAwareController;
 use Pimcore\Db;
+use Pimcore\Helper\ParameterBagHelper;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

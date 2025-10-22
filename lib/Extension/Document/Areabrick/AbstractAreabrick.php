@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Pimcore\Extension\Document\Areabrick;
 
+use Pimcore\Bundle\CoreBundle\DependencyInjection\ContainerAwareInterface;
+use Pimcore\Bundle\CoreBundle\DependencyInjection\ContainerAwareTrait;
 use Pimcore\Extension\Document\Areabrick\Exception\ConfigurationException;
 use Pimcore\Model\Document\Editable;
 use Pimcore\Model\Document\Editable\Area\Info;
 use Pimcore\Model\Document\PageSnippet;
 use Pimcore\Templating\Renderer\EditableRenderer;
-use Pimcore\Bundle\CoreBundle\DependencyInjection\ContainerAwareInterface;
-use Pimcore\Bundle\CoreBundle\DependencyInjection\ContainerAwareTrait;
 
 abstract class AbstractAreabrick implements AreabrickInterface, TemplateAreabrickInterface, ContainerAwareInterface
 {

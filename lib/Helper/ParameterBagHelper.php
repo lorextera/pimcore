@@ -14,6 +14,9 @@ declare(strict_types=1);
 
 namespace Pimcore\Helper;
 
+use const FILTER_NULL_ON_FAILURE;
+use const FILTER_VALIDATE_BOOLEAN;
+use const FILTER_VALIDATE_INT;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
 /**
@@ -33,7 +36,7 @@ final class ParameterBagHelper
      */
     private static function triggerDeprecation(string $method): void
     {
-        if (!filter_var($_SERVER['APP_DEBUG'] ?? false, \FILTER_VALIDATE_BOOLEAN)) {
+        if (!filter_var($_SERVER['APP_DEBUG'] ?? false, FILTER_VALIDATE_BOOLEAN)) {
             return;
         }
 
@@ -76,7 +79,7 @@ final class ParameterBagHelper
     {
         self::triggerDeprecation(__METHOD__);
 
-        return $bag->filter($key, $default, \FILTER_VALIDATE_INT, \FILTER_NULL_ON_FAILURE) ?? $default;
+        return $bag->filter($key, $default, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE) ?? $default;
     }
 
     /**
@@ -112,6 +115,6 @@ final class ParameterBagHelper
             return $default;
         }
 
-        return $bag->filter($key, null, \FILTER_VALIDATE_BOOLEAN, \FILTER_NULL_ON_FAILURE) ?? $default;
+        return $bag->filter($key, null, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) ?? $default;
     }
 }

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Pimcore\Bundle\XliffBundle\Controller;
 
-use Pimcore\Helper\ParameterBagHelper;
 use Exception;
 use Pimcore\Bundle\XliffBundle\ExportService\Exporter\ExporterInterface;
 use Pimcore\Bundle\XliffBundle\ExportService\ExportServiceInterface;
@@ -22,6 +21,7 @@ use Pimcore\Bundle\XliffBundle\ImporterService\ImporterServiceInterface;
 use Pimcore\Bundle\XliffBundle\TranslationItemCollection\TranslationItemCollection;
 use Pimcore\Controller\Traits\JsonHelperTrait;
 use Pimcore\Controller\UserAwareController;
+use Pimcore\Helper\ParameterBagHelper;
 use Pimcore\Logger;
 use Pimcore\Model\Element;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;

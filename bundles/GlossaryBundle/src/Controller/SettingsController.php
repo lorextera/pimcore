@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Pimcore\Bundle\GlossaryBundle\Controller;
 
-use Pimcore\Helper\ParameterBagHelper;
 use Pimcore\Bundle\GlossaryBundle\Model\Glossary;
 use Pimcore\Cache;
 use Pimcore\Controller\Traits\JsonHelperTrait;
 use Pimcore\Controller\UserAwareController;
 use Pimcore\Extension\Bundle\Exception\AdminClassicBundleNotFoundException;
+use Pimcore\Helper\ParameterBagHelper;
 use Pimcore\Model\Document;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

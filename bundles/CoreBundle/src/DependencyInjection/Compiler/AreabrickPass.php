@@ -13,20 +13,20 @@ declare(strict_types=1);
 
 namespace Pimcore\Bundle\CoreBundle\DependencyInjection\Compiler;
 
-use ReflectionClass;
 use Doctrine\Inflector\Inflector;
-use Symfony\Component\Finder\Finder;
 use Doctrine\Inflector\InflectorFactory;
-use Pimcore\Templating\Renderer\EditableRenderer;
-use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\Config\Resource\DirectoryResource;
-use Pimcore\Extension\Document\Areabrick\AreabrickManager;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Pimcore\Extension\Document\Areabrick\AreabrickInterface;
-use Symfony\Component\Config\Resource\FileExistenceResource;
+use Pimcore\Extension\Document\Areabrick\AreabrickManager;
 use Pimcore\Extension\Document\Areabrick\Attribute\AsAreabrick;
+use Pimcore\Templating\Renderer\EditableRenderer;
+use ReflectionClass;
+use Symfony\Component\Config\Resource\DirectoryResource;
+use Symfony\Component\Config\Resource\FileExistenceResource;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\Finder\Finder;
 
 /**
  * @internal
@@ -148,7 +148,6 @@ final class AreabrickPass implements CompilerPassInterface
             $definition->addMethodCall('setEditableRenderer', [new Reference(EditableRenderer::class)]);
         }
     }
-
 
     /**
      * Look for classes implementing AreabrickInterface in each bundle's Document\Areabrick sub-namespace

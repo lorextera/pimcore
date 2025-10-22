@@ -13,11 +13,12 @@ declare(strict_types=1);
 
 namespace Pimcore\Bundle\CoreBundle\DependencyInjection\Compiler;
 
-use ReflectionClass;
-use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Pimcore\Bundle\CoreBundle\DependencyInjection\ContainerAwareInterface;
+use ReflectionClass;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
+use Throwable;
 
 /**
  * Automatically injects the service container into all services implementing ContainerAwareInterface.
@@ -57,7 +58,7 @@ final class ContainerAwarePass implements CompilerPassInterface
                 if ($reflector->implementsInterface($containerAwareInterface)) {
                     $definition->addMethodCall('setContainer', [$serviceContainerRef]);
                 }
-            } catch (\Throwable $e) {
+            } catch (Throwable $e) {
                 continue;
             }
         }
