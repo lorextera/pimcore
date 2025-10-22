@@ -208,7 +208,7 @@
   },
   "extra": {
     "branch-alias": {
-      "11.x-dev": "11.5.x-dev"
+      "dev-12.x": "12.3.x-dev"
     }
   },
   "scripts": {
