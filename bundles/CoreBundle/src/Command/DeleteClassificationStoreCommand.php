@@ -63,6 +63,7 @@ class DeleteClassificationStoreCommand extends AbstractCommand
             if (!is_numeric($storeId)) {
                 throw new Exception('Invalid store ID');
             }
+
             return $this->deleteByStoreId((int)$storeId);
         } else {
             throw new Exception('Please provide a store ID or use the --inactive-only option');
@@ -77,6 +78,7 @@ class DeleteClassificationStoreCommand extends AbstractCommand
             echo 'Deleting inactive store with ID ' . $keyConfig->getId() . "\n";
             $keyConfig->delete();
         }
+
         return 0;
     }
 
