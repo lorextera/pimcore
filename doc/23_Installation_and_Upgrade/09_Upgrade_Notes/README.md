@@ -2,8 +2,9 @@
 
 ## Pimcore 12.3.0
 
--   Added a new command `pimcore:classes:changes` to list all Class Definition that have been changed. This command helps in tracking modifications and can be useful for auditing and version control purposes.
-
+- Added a new command `pimcore:classes:changes` to list all Class Definition that have been changed. This command helps in tracking modifications and can be useful for auditing and version control purposes.
+- Added possibility to `pimcore:classificationstore:delete-store` to pass `--inactive-only` flag to only delete inactive (soft deleted from UI) classification stores Keys.
+ 
 ### Deprecations
 
 #### [Symfony 6.x Components Support]
