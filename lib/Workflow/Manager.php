@@ -383,7 +383,11 @@ class Manager
                 continue;
             }
 
-            $marking = $workflow->getMarking($element);
+            try {
+                $marking = $workflow->getMarking($element);
+            } catch (LogicException $e) {
+                continue;
+            }
 
             if (!count($marking->getPlaces())) {
                 continue;
