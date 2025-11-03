@@ -59,6 +59,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Lock\LockFactory;
 use Symfony\Component\Lock\LockInterface;
 use Symfony\Component\Mime\MimeTypes;
+use Throwable;
 
 /**
  * @method Dao getDao()
@@ -1703,20 +1704,40 @@ class Asset extends Element\AbstractElement
         try {
             $movedFiles = [];
             $children = $storage->listContents($oldPath, true);
-            foreach ($children as $child) {
-                if ($child['type'] === 'file') {
-                    $src  = $child['path'];
-                    $dest = str_replace($oldPath, $newPath, '/' . $src);
-                    $storage->move($src, $dest);
-                    $movedFiles[$dest] = $src;
+            $totalChildren = iterator_count($children);
+
+            if ($totalChildren > 0) {
+                /** @var \League\Flysystem\StorageAttributes $child */
+                foreach ($children as $child) {
+                    if ($child instanceof \League\Flysystem\FileAttributes) {
+                        $src  = $child['path'];
+                        $dest = str_replace($oldPath, $newPath, '/' . $src);
+                        $storage->move($src, $dest);
+                        $movedFiles[$dest] = $src;
+                    }
+                }
+
+                $movedCount = count($movedFiles);
+
+                if ($movedCount === $totalChildren) {
+                    $storage->deleteDirectory($oldPath);
+                } else {
+                    \Pimcore\Logger::info(
+                        sprintf(
+                            'Moved %d/%d files from %s to %s. No exception was thrown for %d files,
+                            so the source directory was not deleted.',
+                            $movedCount, $totalChildren, $oldPath, $newPath, $totalChildren - $movedCount
+                        )
+                    );
                 }
             }
+        } catch (Throwable $e) {
+            Logger::error(sprintf('Asset Move to %s failed: %s', $newPath, $e->getMessage()));
 
-            $storage->deleteDirectory($oldPath);
-        } catch (UnableToMoveFile $e) {
             if ($skipError) {
                 return;
             }
+
             // rollback moved files
             foreach ($movedFiles as $src => $dest) {
                 $storage->move($src, $dest);
