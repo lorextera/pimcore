@@ -186,7 +186,7 @@ class Ghostscript extends Adapter
                 '-r' . $resolution,
                 '-o',
                 $imageTargetPath,
-                $localFile
+                $localFile,
             ];
 
             Console::addLowProcessPriority($cmd);

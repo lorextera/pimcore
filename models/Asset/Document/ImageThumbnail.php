@@ -48,8 +48,7 @@ final class ImageThumbnail implements ImageThumbnailInterface
         array|string|Image\Thumbnail\Config|null $config = null,
         int $page = 1,
         bool $deferred = true
-    )
-    {
+    ) {
         $this->asset = $asset;
         $this->config = $this->createConfig($config ?? []);
         $this->page = $page;
