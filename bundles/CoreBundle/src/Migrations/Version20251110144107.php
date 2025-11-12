@@ -18,7 +18,6 @@ use Doctrine\Migrations\AbstractMigration;
 
 final class Version20251110144107 extends AbstractMigration
 {
-
     public function getDescription(): string
     {
         return 'Add shareBetweenFolders column to gridconfigs table';
