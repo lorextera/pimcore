@@ -6,8 +6,8 @@
 
 -   Added a new command `pimcore:classes:changes` to list all Class Definition that have been changed. This command helps in tracking modifications and can be useful for auditing and version control purposes.
 -   Added possibility to `pimcore:classificationstore:delete-store` to pass `--inactive-only` flag to only delete inactive (soft deleted from UI) classification stores Keys.
--   Added a thumbnail setting option to use Crop Box (the visible area), instead of Media Box when converting documents via Ghostscript.
--   Added the possibility to create and share an Asset Grid Configuration across all folders
+-   Added a new command `pimcore:migrate:mail-logs-folder-structure` to migrate all mail log files to a new folder structure (YYYY/MM/DD/\<log filename\>).
+-   Added a thumbnail setting option to use Crop Box (the visible area), instead of Media Box when converting documents via Ghostscript. 
 
 ### Deprecations
 
@@ -95,6 +95,22 @@ This is part of the migration to Symfony 7, which no longer includes the `symfon
 **Action Required:**
 Update your code to use `Twig\Environment` directly instead of `Symfony\Component\Templating\EngineInterface`.
 All functionality remains the same, but the interface changes from the Symfony templating abstraction to Twig directly.
+
+#### Folder structure for email logs
+
+The command `pimcore:migrate:mail-logs-folder-structure` and supporting the old structure are deprecated and will be removed in version 13.0.
+
+**What's Deprecated:**
+
+1. **Commands**: `pimcore:migrate:mail-logs-folder-structure`
+
+**Timeline:**
+
+-   Version 12.3: Deprecation warnings introduced
+-   Version 13.0: Complete removal of the command `pimcore:migrate:mail-logs-folder-structure` and supporting the old structure
+
+**Action Required:**
+Execute the command `pimcore:migrate:mail-logs-folder-structure` or move the files manually to YYYY/MM/DD/\<log filename\>.
 
 ## Pimcore 12.2.0
 
