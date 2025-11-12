@@ -14,11 +14,11 @@ declare(strict_types=1);
 namespace Pimcore\Model\Tool\Email;
 
 use DateTime;
-use Pimcore\Model;
-use Pimcore\Logger;
-use Pimcore\Tool\Storage;
-use League\Flysystem\UnableToWriteFile;
 use League\Flysystem\FilesystemException;
+use League\Flysystem\UnableToWriteFile;
+use Pimcore\Logger;
+use Pimcore\Model;
+use Pimcore\Tool\Storage;
 
 /**
  * @internal
@@ -329,6 +329,7 @@ class Log extends Model\AbstractModel
 
     /**
      * Returns the filename of the html log
+     *
      * @deprecated since Pimcore 12 use getHtmlLogFilenameWithDate() instead
      */
     public function getHtmlLogFilename(): string
@@ -338,7 +339,7 @@ class Log extends Model\AbstractModel
 
     private function getHtmlLogFilenameWithDate(): string
     {
-        $date = (new \DateTime())->setTimestamp($this->getSentDate());
+        $date = (new DateTime())->setTimestamp($this->getSentDate());
         $formattedDate = $date->format('Y' . DIRECTORY_SEPARATOR . 'm' . DIRECTORY_SEPARATOR . 'd');
 
         return $formattedDate . DIRECTORY_SEPARATOR . 'email-' . $this->getId() . '-html.log';
@@ -346,6 +347,7 @@ class Log extends Model\AbstractModel
 
     /**
      * Returns the filename of the text log
+     *
      * @deprecated since Pimcore 12 use getTextLogFilenameWithDate() instead
      */
     public function getTextLogFilename(): string
@@ -355,7 +357,7 @@ class Log extends Model\AbstractModel
 
     private function getTextLogFilenameWithDate(): string
     {
-        $date = (new \DateTime())->setTimestamp($this->getSentDate());
+        $date = (new DateTime())->setTimestamp($this->getSentDate());
         $formattedDate = $date->format('Y' . DIRECTORY_SEPARATOR . 'm' . DIRECTORY_SEPARATOR . 'd');
 
         return $formattedDate . DIRECTORY_SEPARATOR . 'email-' . $this->getId() . '-txt.log';
@@ -369,8 +371,7 @@ class Log extends Model\AbstractModel
         if ($this->getEmailLogExistsHtml()) {
             $storage = Storage::get('email_log');
 
-
-            if ($storage->fileExists($this->getHtmlLogFilenameWithDate()) ) {
+            if ($storage->fileExists($this->getHtmlLogFilenameWithDate())) {
                 return $storage->read($this->getHtmlLogFilenameWithDate());
             } else {
                 //TODO: remove in Pimcore 13
@@ -380,6 +381,7 @@ class Log extends Model\AbstractModel
                     'Please run the migration command "pimcore:migrations:email-log-files-move"
                     to move email log files to date-based folders or move the files manually.'
                 );
+
                 return $storage->read($this->getHtmlLogFilename());
             }
         }
@@ -395,7 +397,7 @@ class Log extends Model\AbstractModel
         if ($this->getEmailLogExistsText()) {
             $storage = Storage::get('email_log');
 
-            if ($storage->fileExists($this->getTextLogFilenameWithDate()) ) {
+            if ($storage->fileExists($this->getTextLogFilenameWithDate())) {
                 return $storage->read($this->getTextLogFilenameWithDate());
             } else {
                 //TODO: remove in Pimcore 13
@@ -405,6 +407,7 @@ class Log extends Model\AbstractModel
                     'Please run the migration command "pimcore:migrations:email-log-files-move"
                     to move email log files to date-based folders or move the files manually.'
                 );
+
                 return $storage->read($this->getTextLogFilename());
             }
         }
