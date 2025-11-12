@@ -1447,7 +1447,7 @@ class Service extends Model\Element\Service
             $fd->getCalculatorExpression(),
             [
                 'object' => $object,
-                'data' => $data
+                'data' => $data,
             ]
         );
     }
