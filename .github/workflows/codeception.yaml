@@ -27,7 +27,7 @@ permissions:
 
 jobs:
     codeception-tests:
-        uses: pimcore/workflows-collection-public/.github/workflows/reusable-codeception-public.yaml@codeception_fix
+        uses: pimcore/workflows-collection-public/.github/workflows/reusable-codeception-public.yaml@ae2937a57c34e25d8c3cdf05099362f7a62f373a
         strategy:
             matrix:
                 include:
