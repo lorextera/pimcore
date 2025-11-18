@@ -11,6 +11,26 @@
 
 ### Deprecations
 
+#### Bundles
+
+**What's Deprecated:**
+
+The following bundles won't be migrated to Pimcore Studio
+- GlossaryBundle
+- SeoBundle
+- WordExportBundle
+- XliffBundle
+
+SimpleBackendSearchBundle - Studio implements this functionality out-of-the-box.
+
+StaticRoutesBundle - All functionality except of the redirects and sitemaps won't be migrated to Pimcore Studio
+
+**Timeline:**
+
+-   Version 12.3: Deprecation notice
+-   Version 13.0: Complete removal of the bundles
+
+
 #### [Symfony 6.x Components Support]
 
 Support for all Symfony 6.x components will be removed in version 13.0.
