@@ -34,7 +34,7 @@ class PimcoreWordExportBundle extends AbstractPimcoreBundle implements PimcoreBu
             'The WordExportBundle is deprecated and will be discontinued with Pimcore Studio.'
         );
     }
-    
+
     public function getCssPaths(): array
     {
         return [
