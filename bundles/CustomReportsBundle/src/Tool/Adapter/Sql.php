@@ -170,19 +170,19 @@ class Sql extends AbstractAdapter
                         $condition[] = $db->quoteIdentifier(
                             $filter['property']) .
                             ' BETWEEN ' .
-                            $db->quote($value) .
+                            $db->quote((string)$value) .
                             ' AND ' .
                             $db->quote((string)$maxValue);
 
                         break;
                     }
                     $fields[] = $filter['property'];
-                    $condition[] = $db->quoteIdentifier($filter['property']) . ' ' . $compMapping[$operator] . ' ' . $db->quote($value);
+                    $condition[] = $db->quoteIdentifier($filter['property']) . ' ' . $compMapping[$operator] . ' ' . $db->quote((string)$value);
 
                     break;
                 case '=':
                     $fields[] = $filter['property'];
-                    $condition[] = $db->quoteIdentifier($filter['property']) . ' = ' . $db->quote($value);
+                    $condition[] = $db->quoteIdentifier($filter['property']) . ' = ' . $db->quote((string)$value);
 
                     break;
             }
