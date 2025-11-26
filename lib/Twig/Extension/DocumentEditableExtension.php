@@ -86,8 +86,7 @@ class DocumentEditableExtension extends AbstractExtension
         string $type,
         string $name,
         array $options = []
-    ): string|EditableInterface
-    {
+    ): string|EditableInterface {
         $document = $context['document'] ?? null;
         if (!($document instanceof PageSnippet)) {
             return '';
