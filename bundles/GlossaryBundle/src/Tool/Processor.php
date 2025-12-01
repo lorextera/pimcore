@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace Pimcore\Bundle\GlossaryBundle\Tool;
 
-use Pimcore\Cache;
-use Pimcore\Model\Site;
-use Pimcore\Model\Document;
-use Pimcore\Tool\DomCrawler;
-use Pimcore\Http\RequestHelper;
 use Pimcore\Bundle\GlossaryBundle\Model\Glossary;
+use Pimcore\Cache;
 use Pimcore\Http\Request\Resolver\DocumentResolver;
 use Pimcore\Http\Request\Resolver\EditmodeResolver;
+use Pimcore\Http\RequestHelper;
+use Pimcore\Model\Document;
+use Pimcore\Model\Site;
+use Pimcore\Tool\DomCrawler;
 
 /**
  * @internal
