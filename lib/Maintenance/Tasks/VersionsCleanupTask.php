@@ -13,11 +13,7 @@ declare(strict_types=1);
 
 namespace Pimcore\Maintenance\Tasks;
 
-use Pimcore;
 use Pimcore\Maintenance\TaskInterface;
-use Pimcore\Model\Asset;
-use Pimcore\Model\DataObject;
-use Pimcore\Model\Document;
 use Pimcore\Model\Element;
 use Pimcore\Model\Version;
 use Pimcore\SystemSettingsConfig;
@@ -36,7 +32,6 @@ class VersionsCleanupTask implements TaskInterface
     {
         $this->doVersionCleanup();
     }
-
 
     private function doVersionCleanup(): void
     {

@@ -12,7 +12,6 @@
 
 namespace Pimcore\Model\Version;
 
-use Pimcore;
 use Pimcore\Db\Helper;
 use Pimcore\Logger;
 use Pimcore\Model;
@@ -129,7 +128,7 @@ class Dao extends Model\Dao\AbstractDao
                     AND `date` < ? AND AND IFNULL(active,  0) = 0',
                     [
                         $elementType['elementType'],
-                        $deadline
+                        $deadline,
                     ]
                 );
                 $versionIds = array_merge($versionIds, $tmpVersionIds);
