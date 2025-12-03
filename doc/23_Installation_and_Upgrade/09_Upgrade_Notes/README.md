@@ -372,8 +372,7 @@ ORDER BY TABLE_NAME;
 
 #### [WYSIWYG-Editor]
 
--   `TinyMCE` is deprecated. Use `Quill` (`pimcore/quill-bundle`) instead.
-
+-   `TinyMCE` is deprecated for Pimcore Community edition. Use `Quill` (`pimcore/quill-bundle`) instead.
 ### Elements
 
 #### [Assets]
