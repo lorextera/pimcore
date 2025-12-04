@@ -16,6 +16,7 @@ namespace Pimcore\Bundle\CoreBundle;
 use Pimcore\Bundle\CoreBundle\DependencyInjection\Compiler\AreabrickPass;
 use Pimcore\Bundle\CoreBundle\DependencyInjection\Compiler\CacheFallbackPass;
 use Pimcore\Bundle\CoreBundle\DependencyInjection\Compiler\ContainerAwarePass;
+use Pimcore\Bundle\CoreBundle\DependencyInjection\Compiler\DoctrineCommandPrefixPass;
 use Pimcore\Bundle\CoreBundle\DependencyInjection\Compiler\HtmlSanitizerPass;
 use Pimcore\Bundle\CoreBundle\DependencyInjection\Compiler\ImageAdapterAliasPass;
 use Pimcore\Bundle\CoreBundle\DependencyInjection\Compiler\LongRunningHelperPass;
@@ -50,6 +51,7 @@ class PimcoreCoreBundle extends Bundle
     {
         $container->addCompilerPass(new ContainerAwarePass());
         $container->addCompilerPass(new AreabrickPass());
+        $container->addCompilerPass(new DoctrineCommandPrefixPass());
         $container->addCompilerPass(new NavigationRendererPass());
         $container->addCompilerPass(new ServiceControllersPass());
         $container->addCompilerPass(new MonologPublicLoggerPass());
