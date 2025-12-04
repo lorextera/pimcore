@@ -72,6 +72,7 @@ class Multiselect extends Data implements
      *
      */
     public bool $enforceValidation = false;
+
     /**
      * @internal
      */

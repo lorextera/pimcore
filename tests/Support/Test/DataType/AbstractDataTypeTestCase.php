@@ -672,7 +672,6 @@ abstract class AbstractDataTypeTestCase extends TestCase
         $this->testDataHelper->assertMultiSelectEnforced($this->testObject, 'multiselectenforced', $this->seed);
     }
 
-
     public function testNumeric(): void
     {
         $this->createTestObject('number');

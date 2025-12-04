@@ -517,8 +517,7 @@ class Model extends AbstractDefinitionHelper
                 ['key' => 'Huhn', 'value' => 'chicken'],
             ]));
 
-
-            /** @var \Pimcore\Model\DataObject\ClassDefinition\Data\Multiselect $multiselectEnforced **/
+            /** @var \Pimcore\Model\DataObject\ClassDefinition\Data\Multiselect $multiselectEnforced * */
             $multiselectEnforced = $this->createDataChild('multiselect', 'multiselectenforced');
             $multiselectEnforced->setOptions([
                 ['key' => 'Katze', 'value' => 'cat'],
@@ -527,7 +526,6 @@ class Model extends AbstractDefinitionHelper
             ]);
             $multiselectEnforced->setEnforceValidation(true);
             $panel->addChild($multiselectEnforced);
-
 
             $panel->addChild($this->createDataChild('language', 'languagex'));
             $panel->addChild($this->createDataChild('languagemultiselect', 'languages'));

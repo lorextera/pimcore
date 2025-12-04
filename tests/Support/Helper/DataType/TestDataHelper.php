@@ -579,7 +579,7 @@ class TestDataHelper extends AbstractTestDataHelper
         try {
             $object->save();
             $this->assertTrue(true); //save successfull without exceptions
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             if (
                 str_contains($e->getMessage(), 'Invalid multiselect option') &&
                 str_contains($e->getMessage(), 'dragon')
@@ -607,7 +607,7 @@ class TestDataHelper extends AbstractTestDataHelper
         try {
             $object->save();
             $this->assertFalse(true);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             if (
                 str_contains($e->getMessage(), 'Invalid multiselect option') &&
                 str_contains($e->getMessage(), 'dragon')
@@ -1323,7 +1323,6 @@ class TestDataHelper extends AbstractTestDataHelper
         $setter = 'set' . ucfirst($field);
         $object->$setter(['cat', 'tiger']);
     }
-
 
     public function fillMultihref(Concrete $object, string $field, int $seed = 1): void
     {
