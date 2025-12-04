@@ -13,10 +13,8 @@ declare(strict_types=1);
 
 namespace Pimcore\Bundle\CoreBundle\EventListener;
 
-use Doctrine\Migrations\Tools\Console\Command\DoctrineCommand;
 use Pimcore\Console\CommandContextHolder;
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
