@@ -131,7 +131,6 @@ final class Application extends \Symfony\Bundle\FrameworkBundle\Console\Applicat
         return $inputDefinition;
     }
 
-
     public function add(Command $command): ?Command
     {
         if ($command instanceof LazyCommand && str_starts_with($command->getName(), 'doctrine:')) {
