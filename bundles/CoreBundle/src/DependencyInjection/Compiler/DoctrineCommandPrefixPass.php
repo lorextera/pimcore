@@ -30,7 +30,7 @@ class DoctrineCommandPrefixPass implements CompilerPassInterface
                     'prefix',
                     null,
                     InputOption::VALUE_OPTIONAL,
-                    'Optional prefix filter for version classes, eg. Pimcore\Bundle\CoreBundle\Migrations'
+                    'Optional prefix filter for version classes, eg. Pimcore\Bundle\CoreBundle\Migrations',
                 ]);
             }
         }
