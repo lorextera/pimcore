@@ -19,12 +19,10 @@ on:
             - "*_actions"
         paths-ignore:
             - 'doc/**'
-            - 'bundles/**/public/**'
-            
+            - 'bundles/**/public/**'   
 permissions:
   contents: read
  
-
 jobs:
     codeception-tests:
         uses: pimcore/workflows-collection-public/.github/workflows/reusable-codeception-public.yaml@main
@@ -54,7 +52,6 @@ jobs:
             MINIO_ACCESS_KEY: "PIMCORE_OBJECT_STORAGE_ACCESS_KEY"
             MINIO_SECRET_KEY: "PIMCORE_OBJECT_STORAGE_SECRET_KEY"
             BRANCH_NAME: ${{ github.head_ref || github.ref }}
-
         secrets:
             PIMCORE_INSTANCE_IDENTIFIER: ${{ secrets.PIMCORE_CI_INSTANCE_IDENTIFIER }}
             PIMCORE_ENCRYPTION_SECRET: ${{ secrets.PIMCORE_CI_ENCRYPTION_SECRET }}
