@@ -7,15 +7,15 @@ on:
     pull_request_target:
         types: [opened, synchronize, reopened]
         branches:
-            - "[0-9]+.[0-9]+"
-            - "[0-9]+.x"
+            - "12.*"
+            - "12.x"
         paths-ignore:
             - 'doc/**'
             - 'bundles/**/public/**'
     push:
         branches:
-            - "[0-9]+.[0-9]+"
-            - "[0-9]+.x"
+            - "12.*"
+            - "12.x"
             - "*_actions"
         paths-ignore:
             - 'doc/**'
