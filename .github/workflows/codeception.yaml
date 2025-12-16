@@ -8,14 +8,12 @@ on:
         types: [opened, synchronize, reopened]
         branches:
             - "12.*"
-            - "12.x"
         paths-ignore:
             - 'doc/**'
             - 'bundles/**/public/**'
     push:
         branches:
             - "12.*"
-            - "12.x"
             - "*_actions"
         paths-ignore:
             - 'doc/**'

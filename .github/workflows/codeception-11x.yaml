@@ -6,14 +6,12 @@ on:
         types: [opened, synchronize, reopened]
         branches:
             - "11.*"
-            - "11.5"
         paths-ignore:
             - 'doc/**'
             - 'bundles/**/public/**'
     push:
         branches:
             - "11.*"
-            - "11.5"
         paths-ignore:
             - 'doc/**'
             - 'bundles/**/public/**'
