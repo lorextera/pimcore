@@ -23,7 +23,7 @@ on:
         
 permissions:
   contents: read
- 
+
 
 jobs:
     codeception-tests:
