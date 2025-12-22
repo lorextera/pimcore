@@ -16,7 +16,6 @@ namespace Pimcore\Twig;
 
 use Pimcore\Model\Document\Editable;
 use Symfony\Bundle\TwigBundle\DependencyInjection\Configurator\EnvironmentConfigurator;
-use Symfony\UX\TwigComponent\Twig\TwigEnvironmentConfigurator as UxEnvironmentConfigurator;
 use Twig\Environment;
 use Twig\Runtime\EscaperRuntime;
 
@@ -26,7 +25,7 @@ use Twig\Runtime\EscaperRuntime;
 final class TwigEnvironmentConfigurator
 {
     public function __construct(
-        private readonly EnvironmentConfigurator|UxEnvironmentConfigurator $decorated,
+        private readonly EnvironmentConfigurator $decorated,
     ) {
     }
 
