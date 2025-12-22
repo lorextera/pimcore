@@ -50,8 +50,14 @@ jobs:
               with:
                 ref: "refs/pull/${{ github.event.pull_request.number }}/merge"
 
-            - name: Checkout PR head (for push or other events)
-              if: github.event_name != 'pull_request_target'
+            - name: Checkout 11.5 branch for scheduled runs
+              if: github.event_name == 'schedule'
+              uses: "actions/checkout@v4"
+              with:
+                ref: "11.5"
+
+            - name: Checkout PR head (for push or workflow_dispatch)
+              if: github.event_name != 'pull_request_target' && github.event_name != 'schedule'
               uses: "actions/checkout@v4"
 
             - name: "Install PHP"
