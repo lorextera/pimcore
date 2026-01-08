@@ -171,7 +171,7 @@ class SearchController extends UserAwareController
             $localizedJoin = '';
             foreach ($bricks as $ob) {
                 $objectBrickDefinition = Definition::getByKey($ob);
-                if (!$objectBrickDefinition){
+                if (!$objectBrickDefinition) {
                     throw new InvalidArgumentException('Check your object brick filter arguments.');
                 }
 
