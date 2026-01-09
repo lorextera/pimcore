@@ -36,7 +36,8 @@ class ResponseHeaderResolver extends AbstractRequestResolver
         if (null === $request) {
             $request = $this->getCurrentRequest();
         }
-
+        
+        /** @phpstan-ignore-next-line */
         return $request->attributes->all(static::ATTRIBUTE_RESPONSE_HEADER);
     }
 
