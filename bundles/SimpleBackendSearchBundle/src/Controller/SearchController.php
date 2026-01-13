@@ -34,6 +34,7 @@ use Pimcore\Helper\ParameterBagHelper;
 use Pimcore\Model\Asset;
 use Pimcore\Model\DataObject;
 use Pimcore\Model\DataObject\ClassDefinition\Data\Localizedfields;
+use Pimcore\Model\DataObject\Objectbrick\Definition;
 use Pimcore\Model\Document;
 use Pimcore\Model\Element;
 use Pimcore\Model\Element\AdminStyle;
@@ -165,6 +166,11 @@ class SearchController extends UserAwareController
             $join = '';
             $localizedJoin = '';
             foreach ($bricks as $ob) {
+                $objectBrickDefinition = Definition::getByKey($ob);
+                if (!$objectBrickDefinition) {
+                    throw new InvalidArgumentException('Check your object brick filter arguments.');
+                }
+
                 $brickAlias = ' `' . $ob .'`';
                 $objectTable = '`search_backend_data`';
 
