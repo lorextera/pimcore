@@ -815,7 +815,7 @@ class Block extends Data implements CustomResourcePersistingInterface, ResourceP
             $unsupportedFd = [
                 Classificationstore::class,
                 Fieldcollections::class,
-                Localizedfields::class
+                Localizedfields::class,
             ];
 
             foreach ($data as $blockElements) {
@@ -823,7 +823,7 @@ class Block extends Data implements CustomResourcePersistingInterface, ResourceP
                     $fd = $this->getFieldDefinition($elementName);
 
                     if ($fd instanceof PreGetDataInterface) {
-                        if (!array_filter($unsupportedFd, fn($i) => $fd instanceof $i)) {
+                        if (!array_filter($unsupportedFd, fn ($i) => $fd instanceof $i)) {
                             $preGetData = $fd->preGetData(
                                 $blockElement,
                                 array_merge($params, ['data' => $blockElement->getData()])
