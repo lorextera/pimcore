@@ -67,6 +67,7 @@ class SearchBackendHandler implements BatchHandlerInterface
 
     private function shouldFlush(): bool
     {
-        return 50 <= count($this->jobs);
+        return true; // fix update
+        // return 50 <= count($this->jobs);
     }
 }
